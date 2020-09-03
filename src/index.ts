@@ -1,3 +1,1 @@
-export function helloWorld(): string {
-  return "hello";
-}
+export { getDefaultSchema, loadSchema } from "./loadSchema";
