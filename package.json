@@ -9,13 +9,25 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "check:lint": "eslint . --ext=ts,js",
+    "check:test": "jest test"
   },
   "devDependencies": {
+    "@types/node": "^14.6.3",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "eslint": "^7.8.1",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.4.2",
+    "prettier": "^2.1.1",
+    "pretty-quick": "^3.0.0",
+    "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "graphql": "^15.3.0",
     "graphql-tools": "^6.2.0"
   }
 }
