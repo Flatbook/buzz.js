@@ -1,0 +1,21 @@
+{
+  "name": "buzz",
+  "version": "0.1.0",
+  "description": "Tools for mocking graphql queries and fragments",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/flatbook/buzz",
+  "author": "Steve Coffey",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "graphql-tools": "^6.2.0"
+  }
+}
