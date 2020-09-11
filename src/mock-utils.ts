@@ -64,7 +64,6 @@ export function mergeMocks(o1: any, o2: any): any {
 }
 
 export function expandMockValue<T>(value: Mock<T>, r = 0): any {
-  debugger;
   if (value instanceof Array) {
     const mappedValues = value.map(element => expandMockValue(element, r + 1));
     return () => mappedValues;
