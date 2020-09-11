@@ -1,18 +1,18 @@
-import { addMocksToSchema, IMocks } from "@graphql-tools/mock";
+import { addMocksToSchema } from "@graphql-tools/mock";
 import { ExecutionResult, graphqlSync } from "graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 
 import { getDefaultMocks, getDefaultSchema } from "./load-schema";
 import { GraphQLExecutionError } from "./GraphQLExecutionError";
-import { mergeMocks } from "./mock-utils";
+import { mergeMocks, Mock } from "./mock-utils";
 
-interface MockedQueryResponseOptions {
-  additionalMocks?: Record<string, any>;
+interface MockedQueryResponseOptions<T> {
+  additionalMocks?: Mock<T>;
 }
 
 export function mockQueryResponse<T>(
   query: string,
-  options?: MockedQueryResponseOptions,
+  options?: MockedQueryResponseOptions<T>,
 ): T {
   const schema = makeExecutableSchema({ typeDefs: getDefaultSchema() });
 
@@ -32,3 +32,8 @@ export function mockQueryResponse<T>(
 
   return result.data as T;
 }
+
+export function mockFragment<T>(
+  fragment: string | DocumentNode,
+  options?: MockedQueryResponseOptions<T>,
+): T {}

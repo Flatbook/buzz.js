@@ -1,3 +1,9 @@
 type Query {
-  hello: String!
+  hello: HelloResponse!
+}
+
+type HelloResponse {
+  id: ID!
+  hello: Boolean
+  message: String
 }
