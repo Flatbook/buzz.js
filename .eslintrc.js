@@ -17,7 +17,7 @@ module.exports = {
     "jest/no-jasmine-globals": "off",
     "prettier/prettier": "error",
     "prefer-const": "off",
-    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
