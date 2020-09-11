@@ -6,4 +6,5 @@ module.exports = {
   transform: {
     "^.+\\.ts?$": "ts-jest",
   },
+  setupFilesAfterEnv: ["./jest/clear-default-schema.ts"],
 };
