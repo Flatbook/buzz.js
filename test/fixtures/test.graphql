@@ -1,9 +1,13 @@
-type Query {
-  hello: HelloResponse!
-}
-
 type HelloResponse {
   id: ID!
   hello: Boolean
   message: String
+}
+
+type Mutation {
+  helloMutation: HelloResponse!
+}
+
+type Query {
+  hello: HelloResponse!
 }

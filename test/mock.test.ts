@@ -27,6 +27,50 @@ describe("mockQueryResponse", () => {
     });
   });
 
+  it("throws when an invalid string is passed", () => {
+    const invalidString = "invalid string";
+
+    expect(() => {
+      mockQueryResponse(invalidString);
+    }).toThrowError();
+  });
+
+  it("throws an error when a fragment is passed", () => {
+    const fragment = `
+      fragment TestFragment on HelloResponse {
+        id
+      }
+    `;
+
+    const query = `
+      query TestQuery {
+        hello {
+          id
+        }
+      }
+    `;
+
+    const mutation = `
+      mutation TestMutation {
+        helloMutation {
+          id
+        }
+      }
+    `;
+
+    expect(() => {
+      mockQueryResponse(fragment);
+    }).toThrowError();
+
+    expect(() => {
+      mockQueryResponse(query);
+    }).not.toThrowError();
+
+    expect(() => {
+      mockQueryResponse(mutation);
+    }).not.toThrowError();
+  });
+
   describe("with mocks", () => {
     it("supports custom mocks", () => {
       const result = mockQueryResponse(query, {
