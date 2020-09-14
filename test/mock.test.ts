@@ -1,8 +1,54 @@
-import { loadSchemaFile, mockQueryResponse } from "../src";
+import { loadSchemaFile, mockFragment, mockQueryResponse } from "../src";
+
+beforeEach(() => {
+  loadSchemaFile("./test/fixtures/test.graphql");
+});
 
 describe("mockQueryResponse", () => {
-  beforeEach(() => {
-    loadSchemaFile("./test/fixtures/test.graphql");
+  describe("validations", () => {
+    it("throws when an invalid string is passed", () => {
+      const invalidString = "invalid string";
+
+      expect(() => {
+        mockQueryResponse(invalidString);
+      }).toThrowError();
+    });
+
+    it("throws an error when a fragment is passed", () => {
+      const fragment = `
+      fragment TestFragment on HelloResponse {
+        id
+      }
+    `;
+
+      const query = `
+      query TestQuery {
+        hello {
+          id
+        }
+      }
+    `;
+
+      const mutation = `
+      mutation TestMutation {
+        helloMutation {
+          id
+        }
+      }
+    `;
+
+      expect(() => {
+        mockQueryResponse(fragment);
+      }).toThrowError();
+
+      expect(() => {
+        mockQueryResponse(query);
+      }).not.toThrowError();
+
+      expect(() => {
+        mockQueryResponse(mutation);
+      }).not.toThrowError();
+    });
   });
 
   const query = `
@@ -15,7 +61,7 @@ describe("mockQueryResponse", () => {
       }
     `;
 
-  it("equals hello", () => {
+  it("equals returns default mock values", () => {
     const result = mockQueryResponse(query);
 
     expect(result).toEqual({
@@ -25,50 +71,6 @@ describe("mockQueryResponse", () => {
         message: expect.any(String),
       },
     });
-  });
-
-  it("throws when an invalid string is passed", () => {
-    const invalidString = "invalid string";
-
-    expect(() => {
-      mockQueryResponse(invalidString);
-    }).toThrowError();
-  });
-
-  it("throws an error when a fragment is passed", () => {
-    const fragment = `
-      fragment TestFragment on HelloResponse {
-        id
-      }
-    `;
-
-    const query = `
-      query TestQuery {
-        hello {
-          id
-        }
-      }
-    `;
-
-    const mutation = `
-      mutation TestMutation {
-        helloMutation {
-          id
-        }
-      }
-    `;
-
-    expect(() => {
-      mockQueryResponse(fragment);
-    }).toThrowError();
-
-    expect(() => {
-      mockQueryResponse(query);
-    }).not.toThrowError();
-
-    expect(() => {
-      mockQueryResponse(mutation);
-    }).not.toThrowError();
   });
 
   describe("with mocks", () => {
@@ -89,6 +91,66 @@ describe("mockQueryResponse", () => {
           message: expect.any(String),
         },
       });
+    });
+  });
+});
+
+describe("mockFragment", () => {
+  describe("validations", () => {
+    it("throws when an invalid string is passed", () => {
+      const invalidString = "invalid string";
+
+      expect(() => {
+        mockFragment(invalidString);
+      }).toThrowError();
+    });
+
+    it("throws an error when a query or mutation is passed", () => {
+      const fragment = `
+      fragment TestFragment on HelloResponse {
+        id
+      }
+    `;
+
+      const query = `
+      query TestQuery {
+        hello {
+          id
+        }
+      }
+    `;
+
+      const mutation = `
+      mutation TestMutation {
+        helloMutation {
+          id
+        }
+      }
+    `;
+
+      expect(() => {
+        mockFragment(fragment);
+      }).not.toThrowError();
+
+      expect(() => {
+        mockFragment(query);
+      }).toThrowError();
+
+      expect(() => {
+        mockFragment(mutation);
+      }).toThrowError();
+    });
+  });
+
+  const fragment = `
+      fragment TestFragment on HelloResponse {
+        id
+      }
+    `;
+
+  it.only("returns default values for fragment", () => {
+    expect(mockFragment(fragment)).toEqual({
+      id: expect.any(String),
     });
   });
 });
