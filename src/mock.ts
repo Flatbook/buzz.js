@@ -1,29 +1,18 @@
 import gql from "graphql-tag";
 
 import { addMocksToSchema } from "@graphql-tools/mock";
-import {
-  buildOperationNodeForField,
-  isDocumentString,
-  visitSchema,
-  VisitSchemaKind,
-} from "@graphql-tools/utils";
-import {
-  ExecutionResult,
-  GraphQLNamedType,
-  GraphQLSchema,
-  GraphQLObjectType,
-  graphqlSync,
-  FragmentDefinitionNode,
-} from "graphql";
+import { isDocumentString } from "@graphql-tools/utils";
+import { ExecutionResult, graphqlSync } from "graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { OperationVariables } from "react-apollo";
 
 import { getDefaultMocks, getDefaultSchema } from "./load-schema";
 import { GraphQLExecutionError } from "./GraphQLExecutionError";
 import { mergeMocks, Mock } from "./mock-utils";
 
-interface MockedQueryResponseOptions<T> {
+interface MockedQueryResponseOptions<T, TVariables = OperationVariables> {
   additionalMocks?: Mock<T>;
-  variables?: Record<string, unknown>;
+  variables?: TVariables;
 }
 
 export function mockQueryResponse<T>(
@@ -56,54 +45,6 @@ export function mockQueryResponse<T>(
   }
 
   return result.data as T;
-}
-
-export function mockFragment<T>(
-  fragment: string,
-  options?: MockedQueryResponseOptions<T>,
-): T | null {
-  if (!isDocumentString(fragment)) {
-    throw new Error("fragment is not a valid GraphQL document");
-  } else if (!validateDefinitions(fragment, "FragmentDefinition")) {
-    throw new Error("document is not a fragment");
-  }
-
-  const {
-    typeCondition: {
-      name: { value },
-    },
-  } = gql`
-    ${fragment}
-  `.definitions[0] as FragmentDefinitionNode;
-
-  const schema = makeExecutableSchema({ typeDefs: getDefaultSchema() });
-
-  visitSchema(schema, {
-    [VisitSchemaKind.OBJECT_TYPE](
-      objType: GraphQLObjectType,
-      schema: GraphQLSchema,
-    ): GraphQLObjectType | null | undefined {
-      console.log({ objType });
-
-      return null;
-    },
-    [VisitSchemaKind.TYPE](
-      type: GraphQLNamedType,
-      schema: GraphQLSchema,
-    ): GraphQLNamedType | null | undefined {
-      console.log({ type });
-      return null;
-    },
-  });
-
-  const builtOperationNode = buildOperationNodeForField({
-    field: value,
-    kind: "query",
-    schema,
-    argNames: [],
-  });
-
-  return {} as T;
 }
 
 function validateDefinitions(

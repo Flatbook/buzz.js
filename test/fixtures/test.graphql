@@ -10,4 +10,5 @@ type Mutation {
 
 type Query {
   hello: HelloResponse!
+  helloWithArgs(id: ID!): HelloResponse!
 }

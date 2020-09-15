@@ -1,3 +1,4 @@
-export { getDefaultSchema, loadSchemaFile } from "./load-schema";
+export { getDefaultSchema, loadSchemaFile, setMocks } from "./load-schema";
 export { GraphQLExecutionError } from "./GraphQLExecutionError";
-export { mockFragment, mockQueryResponse } from "./mock";
+export { mockQueryResponse } from "./mock";
+export { mockUseQuery } from "./apollo-mocks";
