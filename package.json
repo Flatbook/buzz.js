@@ -10,7 +10,6 @@
   "repository": "https://github.com/flatbook/buzz.js",
   "author": "Steve Coffey",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "build": "tsc",
     "check:typesafety": "tsc --noEmit",
