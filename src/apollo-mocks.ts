@@ -1,4 +1,5 @@
 import * as ApolloClientPackage from "@apollo/client";
+import * as ReactHooksPackage from "@apollo/react-hooks";
 import * as ReactHooks from "@apollo/react-hooks";
 
 import {
@@ -22,8 +23,16 @@ interface MockUseQueryOptions<T> {
   additionalMocks?: Mock<T>;
 }
 
-const useQuerySpy = jest.spyOn(ApolloClientPackage, "useQuery");
-const useMutationSpy = jest.spyOn(ApolloClientPackage, "useMutation");
+const useQuerySpies = [
+  jest.spyOn(ApolloClientPackage, "useQuery"),
+  jest.spyOn(ReactHooksPackage, "useQuery"),
+];
+
+const useMutationSpies = [
+  jest.spyOn(ApolloClientPackage, "useMutation"),
+  jest.spyOn(ReactHooksPackage, "useMutation"),
+];
+
 const defaultUseQuery = ReactHooks.useQuery;
 const defaultUseMutation = ReactHooks.useMutation;
 
@@ -102,7 +111,7 @@ export function mockUseQuery<TData = any, TVariables = OperationVariables>(
     return defaultUseQuery(query, options);
   };
 
-  useQuerySpy.mockImplementation(mockFn);
+  useQuerySpies.forEach(spy => spy.mockImplementation(mockFn));
 
   const validator = new QueryValidator();
   queryOperationMap[operationName] = {
@@ -164,7 +173,7 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
     }
   };
 
-  useMutationSpy.mockImplementation(mockFn);
+  useMutationSpies.forEach(spy => spy.mockImplementation(mockFn));
 
   const validator = new MutationValidator();
   mutationOperationMap[operationName] = {
