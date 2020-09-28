@@ -1,9 +1,16 @@
+import * as ApolloClientPackage from "@apollo/client";
 import * as ReactHooks from "@apollo/react-hooks";
-import * as ReactApollo from "react-apollo";
 
-import { ApolloError } from "apollo-client";
+import {
+  ApolloError,
+  MutationFunctionOptions,
+  MutationHookOptions,
+  MutationTuple,
+  QueryHookOptions,
+  QueryResult,
+  OperationVariables,
+} from "@apollo/client";
 import { DocumentNode, OperationDefinitionNode } from "graphql";
-import { QueryResult, OperationVariables } from "react-apollo";
 
 import { Mock } from "./mock-utils";
 import { mockQueryResponse } from "./mock";
@@ -15,6 +22,8 @@ interface MockUseQueryOptions<T> {
   additionalMocks?: Mock<T>;
 }
 
+const useQuerySpy = jest.spyOn(ApolloClientPackage, "useQuery");
+const useMutationSpy = jest.spyOn(ApolloClientPackage, "useMutation");
 const defaultUseQuery = ReactHooks.useQuery;
 const defaultUseMutation = ReactHooks.useMutation;
 
@@ -29,7 +38,7 @@ const mutationOperationMap: Record<
 
 function mockedUseQuery<TData = any, TVariables = OperationVariables>(
   query: DocumentNode,
-  options: ReactHooks.QueryHookOptions<TData, TVariables>,
+  options: QueryHookOptions<TData, TVariables>,
   validator: QueryValidator<TData, TVariables>,
   mockOptions?: MockUseQueryOptions<TData>,
 ): QueryResult<TData, TVariables> {
@@ -73,7 +82,7 @@ export function mockUseQuery<TData = any, TVariables = OperationVariables>(
 ): QueryValidator {
   const mockFn = function (
     query: DocumentNode,
-    options: ReactHooks.QueryHookOptions<TData, TVariables>,
+    options: QueryHookOptions<TData, TVariables>,
   ) {
     if (query.definitions.length === 0) {
       return;
@@ -93,16 +102,13 @@ export function mockUseQuery<TData = any, TVariables = OperationVariables>(
     return defaultUseQuery(query, options);
   };
 
+  useQuerySpy.mockImplementation(mockFn);
+
   const validator = new QueryValidator();
   queryOperationMap[operationName] = {
     validator,
     mockOptions,
   };
-
-  // @ts-ignore useQuery is a readonly; we're going to assign it anyway
-  ReactHooks.useQuery = mockFn;
-  // @ts-ignore useQuery is a readonly; we're going to assign it anyway
-  ReactApollo.useQuery = mockFn;
 
   return validator;
 }
@@ -113,8 +119,8 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
 ): MutationValidator {
   const mockFn = (
     mutation: DocumentNode,
-    options?: ReactHooks.MutationHookOptions<TData, TVariables>,
-  ): ReactHooks.MutationTuple<TData, TVariables> => {
+    options?: MutationHookOptions<TData, TVariables>,
+  ): MutationTuple<TData, TVariables> => {
     if (mutation.definitions.length === 0) {
       return;
     }
@@ -131,8 +137,9 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
       const { validator, mockOptions } = storedMock;
 
       const mutationFn = async (
-        options: ReactApollo.MutationFunctionOptions<TData, TVariables>,
+        options: MutationFunctionOptions<TData, TVariables>,
       ) => {
+        // @ts-ignore only need to store the options used
         validator.addCall({ mutation, options });
       };
 
@@ -157,16 +164,13 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
     }
   };
 
+  useMutationSpy.mockImplementation(mockFn);
+
   const validator = new MutationValidator();
   mutationOperationMap[operationName] = {
     validator,
     mockOptions,
   };
-
-  // @ts-ignore useQuery is a readonly; we're going to assign it anyway
-  ReactHooks.useMutation = mockFn;
-  // @ts-ignore useQuery is a readonly; we're going to assign it anyway
-  ReactApollo.useMutation = mockFn;
 
   return validator;
 }

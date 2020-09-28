@@ -4,7 +4,7 @@ import { addMocksToSchema } from "@graphql-tools/mock";
 import { isDocumentString } from "@graphql-tools/utils";
 import { ExecutionResult, graphqlSync } from "graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { OperationVariables } from "react-apollo";
+import { OperationVariables } from "@apollo/client";
 
 import { getDefaultMocks, getDefaultSchema } from "./load-schema";
 import { GraphQLExecutionError } from "./GraphQLExecutionError";

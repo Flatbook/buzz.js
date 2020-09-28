@@ -3,8 +3,7 @@ import React from "react";
 import gql from "graphql-tag";
 
 import { fireEvent, render } from "@testing-library/react";
-import { ApolloError } from "apollo-client";
-import { useQuery, useMutation } from "react-apollo";
+import { ApolloError, useMutation, useQuery } from "@apollo/client";
 
 import { loadSchemaFile, setMocks } from "../src";
 import { mockUseMutation, mockUseQuery } from "../src/apollo-mocks";

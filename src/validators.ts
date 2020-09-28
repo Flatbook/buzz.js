@@ -1,6 +1,9 @@
-import { MutationHookOptions, QueryHookOptions } from "@apollo/react-hooks";
+import {
+  MutationHookOptions,
+  QueryHookOptions,
+  OperationVariables,
+} from "@apollo/client";
 import { DocumentNode } from "graphql";
-import { OperationVariables } from "react-apollo";
 
 interface QueryInvocation<TData = any, TVariables = OperationVariables> {
   query: DocumentNode;
