@@ -32,6 +32,11 @@ const useMutationSpies = [
   jest.spyOn(ReactHooksPackage, "useMutation"),
 ];
 
+export function restoreMocks(): void {
+  useQuerySpies.forEach(spy => spy.mockRestore());
+  useMutationSpies.forEach(spy => spy.mockRestore());
+}
+
 const defaultUseQuery = ReactHooks.useQuery;
 const defaultUseMutation = ReactHooks.useMutation;
 
