@@ -37,6 +37,11 @@ export function restoreMocks(): void {
   useMutationSpies.forEach(spy => spy.mockRestore());
 }
 
+export function resetMocks(): void {
+  useQuerySpies.forEach(spy => spy.mockReset());
+  useMutationSpies.forEach(spy => spy.mockReset());
+}
+
 const defaultUseQuery = ReactHooks.useQuery;
 const defaultUseMutation = ReactHooks.useMutation;
 
