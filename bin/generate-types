@@ -1,0 +1,11 @@
+#!/bin/bash
+
+yarn run apollo client:codegen \
+  --no-addTypename \
+  --localSchemaFile fixtures/test.graphql \
+  --includes=test-components/** \
+  --mergeInFieldsFromFragmentSpreads \
+  --target=typescript \
+  --outputFlat \
+  ./test-components/types.ts
+
