@@ -1,67 +1,20 @@
 import React from "react";
 
-import gql from "graphql-tag";
-
 import { fireEvent, render } from "@testing-library/react";
-import { ApolloError, useMutation, useQuery } from "@apollo/client";
+import { ApolloError } from "@apollo/client";
 
 import { loadSchemaFile, setMocks } from "../src";
 import { mockUseMutation, mockUseQuery } from "../src/apollo-mocks";
 
-const SimpleQueryComponent = (): JSX.Element => {
-  const query = gql`
-    query TestQuery($id: ID!) {
-      helloWithArgs(id: $id) {
-        id
-        hello
-        message
-      }
-    }
-  `;
-
-  const { data, loading, error } = useQuery(query, {
-    variables: {
-      id: "test-input-id",
-    },
-  });
-
-  const renderMessage = (): string => {
-    if (error) {
-      return `Error: ${error.message}`;
-    } else if (loading) {
-      return "Loading...";
-    } else {
-      return `ID: ${data.helloWithArgs.id}`;
-    }
-  };
-
-  return (
-    <>
-      <div>{renderMessage()}</div>
-    </>
-  );
-};
-
-const SimpleMutationComponent = (): JSX.Element => {
-  const mutation = gql`
-    mutation TestMutation {
-      helloMutation {
-        id
-      }
-    }
-  `;
-
-  const [mutate] = useMutation(mutation);
-
-  const handleClick = () => {
-    mutate();
-  };
-
-  return <button onClick={handleClick}>mutate!</button>;
-};
+import {
+  SimpleMutationComponent,
+  SimpleQueryComponent,
+  TestQuery,
+  TestQueryVariables,
+} from "../test-components";
 
 beforeEach(() => {
-  loadSchemaFile("./test/fixtures/test.graphql");
+  loadSchemaFile("./fixtures/test.graphql");
   setMocks({
     ID: "example-id",
   });
@@ -70,7 +23,7 @@ beforeEach(() => {
 describe("mockUseQuery", () => {
   describe("valid state", () => {
     it("mocks the response with no mocking overhead", () => {
-      mockUseQuery("TestQuery");
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery");
 
       const { getByText } = render(<SimpleQueryComponent />);
       expect(getByText(/^ID: example-id$/).textContent).not.toBeNull();
@@ -79,7 +32,9 @@ describe("mockUseQuery", () => {
 
   describe("validations", () => {
     it("allows expectations to be set on calls", () => {
-      const validator = mockUseQuery("TestQuery");
+      const validator = mockUseQuery<TestQuery, TestQueryVariables>(
+        "TestQuery",
+      );
 
       render(<SimpleQueryComponent />);
       expect(validator.getCalls().length).toEqual(1);
@@ -91,7 +46,7 @@ describe("mockUseQuery", () => {
 
   describe("loading state", () => {
     it("renders loading state", () => {
-      mockUseQuery("TestQuery", {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
         loading: true,
       });
 
@@ -103,7 +58,7 @@ describe("mockUseQuery", () => {
 
   describe("error state", () => {
     it("renders error message", () => {
-      mockUseQuery("TestQuery", {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
         error: new ApolloError({ errorMessage: "test-error" }),
       });
 
@@ -112,8 +67,18 @@ describe("mockUseQuery", () => {
     });
   });
 
-  describe("when query not mocked", () => {
-    it("calls original useQuery", () => {});
+  describe("with additionalMocks", () => {
+    it("overiddes original mock", () => {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
+        additionalMocks: {
+          HelloResponse: {
+            message: null,
+          },
+        },
+      });
+      const { queryByText } = render(<SimpleQueryComponent />);
+      expect(queryByText(/^Message: .*$/)).toBeNull();
+    });
   });
 });
 
@@ -128,9 +93,5 @@ describe("mockUseMutation", () => {
 
       expect(mutationValidator.getCalls().length).toEqual(1);
     });
-  });
-
-  describe("when mutation not mocked", () => {
-    it("calls original useMutation", () => {});
   });
 });

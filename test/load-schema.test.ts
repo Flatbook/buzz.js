@@ -8,7 +8,7 @@ describe("DefaultSchema", () => {
 
 describe("loadSchemaFile", () => {
   it("sets DefaultSchema", () => {
-    loadSchemaFile("./test/fixtures/test.graphql");
+    loadSchemaFile("./fixtures/test.graphql");
 
     expect(getDefaultSchema()).not.toBeNull();
   });

@@ -1,7 +1,7 @@
 import { loadSchemaFile, mockQueryResponse } from "../src";
 
 beforeEach(() => {
-  loadSchemaFile("./test/fixtures/test.graphql");
+  loadSchemaFile("./fixtures/test.graphql");
 });
 
 describe("mockQueryResponse", () => {
