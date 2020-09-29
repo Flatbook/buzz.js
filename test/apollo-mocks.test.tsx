@@ -23,7 +23,7 @@ beforeEach(() => {
 describe("mockUseQuery", () => {
   describe("valid state", () => {
     it("mocks the response with no mocking overhead", () => {
-      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery");
+      mockUseQuery<TestQueryVariables>("TestQuery");
 
       const { getByText } = render(<SimpleQueryComponent />);
       expect(getByText(/^ID: example-id$/).textContent).not.toBeNull();
@@ -32,9 +32,7 @@ describe("mockUseQuery", () => {
 
   describe("validations", () => {
     it("allows expectations to be set on calls", () => {
-      const validator = mockUseQuery<TestQuery, TestQueryVariables>(
-        "TestQuery",
-      );
+      const validator = mockUseQuery<TestQueryVariables>("TestQuery");
 
       render(<SimpleQueryComponent />);
       expect(validator.getCalls().length).toEqual(1);

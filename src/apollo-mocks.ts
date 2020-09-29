@@ -52,38 +52,22 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
 ): QueryResult<TData, TVariables> {
   const queryString = query.loc.source.body;
 
-  const data = mockQueryResponse(queryString, {
+  const data = mockQueryResponse<TData, TVariables>(queryString, {
     additionalMocks: mockOptions?.additionalMocks,
     variables: options.variables,
   });
 
   validator.addCall({ query, options });
 
-  if (mockOptions?.loading) {
-    // @ts-ignore intentionally incomplete response
-    return {
-      loading: true,
-      data: null,
-      error: null,
-      called: true,
-    };
-  } else if (mockOptions?.error) {
-    // @ts-ignore intentionally incomplete response
-    return {
-      loading: false,
-      data: null,
-      error: mockOptions.error,
-    };
-  } else {
-    // @ts-ignore intentionally incomplete response
-    return {
-      loading: false,
-      data: data as TData,
-      error: null,
-      called: true,
-    };
-  }
+  return {
+    data: !mockOptions?.error && !mockOptions?.loading && (data as TData),
+    loading: mockOptions?.loading || false,
+    error: mockOptions?.error,
+    // @ts-ignore intentionally incomplete
+    called: validator.getCalls().length > 0,
+  };
 }
+
 export function mockUseQuery<TData = any, TVariables = OperationVariables>(
   operationName: string,
   mockOptions?: MockUseQueryOptions,
@@ -153,7 +137,7 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
 
       const mutationString = mutation.loc.source.body;
 
-      const data = mockQueryResponse(mutationString, {
+      const data = mockQueryResponse<TData, TVariables>(mutationString, {
         additionalMocks: mockOptions?.additionalMocks,
         variables: options?.variables,
       });

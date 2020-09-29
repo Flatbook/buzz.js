@@ -15,10 +15,10 @@ interface MockedQueryResponseOptions<TVariables = OperationVariables> {
   variables?: TVariables;
 }
 
-export function mockQueryResponse<T>(
+export function mockQueryResponse<TData, TVariables>(
   query: string,
-  options?: MockedQueryResponseOptions<T>,
-): T {
+  options?: MockedQueryResponseOptions<TVariables>,
+): TData {
   if (!isDocumentString(query)) {
     throw new Error("query is not a valid GraphQL document");
   } else if (!validateDefinitions(query, "OperationDefinition")) {
@@ -32,19 +32,19 @@ export function mockQueryResponse<T>(
     mocks: mergeMocks(getDefaultMocks(), options?.additionalMocks),
   });
 
-  const result: ExecutionResult<T> = graphqlSync(
+  const result: ExecutionResult<TData> = graphqlSync(
     mockedSchema,
     query,
     null,
     null,
     options?.variables,
-  ) as ExecutionResult<T>;
+  ) as ExecutionResult<TData>;
 
   if (result.errors) {
     throw new GraphQLExecutionError([...result.errors]);
   }
 
-  return result.data as T;
+  return result.data as TData;
 }
 
 function validateDefinitions(
