@@ -5,13 +5,17 @@ import { isDocumentString } from "@graphql-tools/utils";
 import { ExecutionResult, graphqlSync } from "graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { OperationVariables } from "@apollo/client";
+import { merge } from "lodash";
 
 import { getDefaultMocks, getDefaultSchema } from "./load-schema";
 import { GraphQLExecutionError } from "./GraphQLExecutionError";
-import { mergeMocks } from "./mock-utils";
+import { RecursivePartial } from "./RecursivePartial";
 
-interface MockedQueryResponseOptions<TVariables = OperationVariables> {
-  additionalMocks?: any;
+interface MockedQueryResponseOptions<
+  TData = any,
+  TVariables = OperationVariables
+> {
+  response?: RecursivePartial<TData>;
   variables?: TVariables;
 }
 
@@ -29,7 +33,7 @@ export function mockQueryResponse<TData, TVariables>(
 
   const mockedSchema = addMocksToSchema({
     schema: schema,
-    mocks: mergeMocks(getDefaultMocks(), options?.additionalMocks),
+    mocks: getDefaultMocks(),
   });
 
   const result: ExecutionResult<TData> = graphqlSync(
@@ -44,7 +48,7 @@ export function mockQueryResponse<TData, TVariables>(
     throw new GraphQLExecutionError([...result.errors]);
   }
 
-  return result.data as TData;
+  return merge(result.data, options?.response) as TData;
 }
 
 function validateDefinitions(

@@ -16,10 +16,10 @@ import { DocumentNode, OperationDefinitionNode } from "graphql";
 import { mockQueryResponse } from "./mock";
 import { MutationValidator, QueryValidator } from "./validators";
 
-interface MockUseQueryOptions {
+interface MockUseQueryOptions<TData = any> {
   error?: ApolloError;
   loading?: boolean;
-  additionalMocks?: any;
+  response?: TData;
 }
 
 const useQuerySpies = [
@@ -63,7 +63,7 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
   const queryString = query.loc.source.body;
 
   const data = mockQueryResponse<TData, TVariables>(queryString, {
-    additionalMocks: mockOptions?.additionalMocks,
+    response: mockOptions?.response,
     variables: options.variables,
   });
 
@@ -148,7 +148,7 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
       const mutationString = mutation.loc.source.body;
 
       const data = mockQueryResponse<TData, TVariables>(mutationString, {
-        additionalMocks: mockOptions?.additionalMocks,
+        response: mockOptions?.response,
         variables: options?.variables,
       });
 

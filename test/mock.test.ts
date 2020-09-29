@@ -76,8 +76,8 @@ describe("mockQueryResponse", () => {
   describe("with mocks", () => {
     it("supports custom mocks", () => {
       const result = mockQueryResponse(query, {
-        additionalMocks: {
-          HelloResponse: {
+        response: {
+          hello: {
             id: "Hello|1",
             hello: true,
           },

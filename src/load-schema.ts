@@ -4,8 +4,6 @@
 import { readFileSync } from "fs";
 import { IMocks } from "@graphql-tools/mock";
 
-import { expandMockValue } from "./mock-utils";
-
 let DefaultSchema: string | null = null;
 let DefaultMocks: IMocks = {};
 
@@ -27,6 +25,6 @@ export async function loadSchemaFile(filepath: string): Promise<void> {
   setDefaultSchema(schema);
 }
 
-export function setMocks(mocks: any): void {
-  DefaultMocks = expandMockValue(mocks);
+export function setMocks(mocks: IMocks): void {
+  DefaultMocks = mocks;
 }

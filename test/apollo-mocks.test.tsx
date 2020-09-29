@@ -16,7 +16,7 @@ import {
 beforeEach(() => {
   loadSchemaFile("./fixtures/test.graphql");
   setMocks({
-    ID: "example-id",
+    ID: () => "example-id",
   });
 });
 
@@ -68,8 +68,8 @@ describe("mockUseQuery", () => {
   describe("with additionalMocks", () => {
     it("overiddes original mock", () => {
       mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
-        additionalMocks: {
-          HelloResponse: {
+        response: {
+          helloWithArgs: {
             message: null,
           },
         },
