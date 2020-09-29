@@ -8,10 +8,10 @@ import { OperationVariables } from "@apollo/client";
 
 import { getDefaultMocks, getDefaultSchema } from "./load-schema";
 import { GraphQLExecutionError } from "./GraphQLExecutionError";
-import { mergeMocks, Mock } from "./mock-utils";
+import { mergeMocks } from "./mock-utils";
 
-interface MockedQueryResponseOptions<T, TVariables = OperationVariables> {
-  additionalMocks?: Mock<T>;
+interface MockedQueryResponseOptions<TVariables = OperationVariables> {
+  additionalMocks?: any;
   variables?: TVariables;
 }
 

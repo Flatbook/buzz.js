@@ -13,14 +13,13 @@ import {
 } from "@apollo/client";
 import { DocumentNode, OperationDefinitionNode } from "graphql";
 
-import { Mock } from "./mock-utils";
 import { mockQueryResponse } from "./mock";
 import { MutationValidator, QueryValidator } from "./validators";
 
-interface MockUseQueryOptions<T> {
+interface MockUseQueryOptions {
   error?: ApolloError;
   loading?: boolean;
-  additionalMocks?: Mock<T>;
+  additionalMocks?: any;
 }
 
 const useQuerySpies = [
@@ -38,18 +37,18 @@ const defaultUseMutation = ReactHooks.useMutation;
 
 const queryOperationMap: Record<
   string,
-  { validator: QueryValidator; mockOptions?: MockUseQueryOptions<any> }
+  { validator: QueryValidator; mockOptions?: MockUseQueryOptions }
 > = {};
 const mutationOperationMap: Record<
   string,
-  { validator: MutationValidator; mockOptions?: MockUseQueryOptions<any> }
+  { validator: MutationValidator; mockOptions?: MockUseQueryOptions }
 > = {};
 
 function mockedUseQuery<TData = any, TVariables = OperationVariables>(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables>,
   validator: QueryValidator<TData, TVariables>,
-  mockOptions?: MockUseQueryOptions<TData>,
+  mockOptions?: MockUseQueryOptions,
 ): QueryResult<TData, TVariables> {
   const queryString = query.loc.source.body;
 
@@ -87,7 +86,7 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
 }
 export function mockUseQuery<TData = any, TVariables = OperationVariables>(
   operationName: string,
-  mockOptions?: MockUseQueryOptions<TData>,
+  mockOptions?: MockUseQueryOptions,
 ): QueryValidator {
   const mockFn = function (
     query: DocumentNode,
@@ -124,7 +123,7 @@ export function mockUseQuery<TData = any, TVariables = OperationVariables>(
 
 export function mockUseMutation<TData = any, TVariables = OperationVariables>(
   operationName: string,
-  mockOptions?: MockUseQueryOptions<TData>,
+  mockOptions?: MockUseQueryOptions,
 ): MutationValidator {
   const mockFn = (
     mutation: DocumentNode,
@@ -164,7 +163,7 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
         mutationFn,
         // @ts-ignore intentionally incomplete
         {
-          data: !mockOptions?.error && !mockOptions?.loading && data,
+          data: !mockOptions?.error && !mockOptions?.loading && (data as TData),
           loading: mockOptions?.loading || false,
           error: mockOptions?.error,
           called: validator.getCalls().length > 0,

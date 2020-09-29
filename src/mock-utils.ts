@@ -4,22 +4,6 @@
 import { IMockFn, IMocks } from "@graphql-tools/mock";
 import { mapValues, mergeWith } from "lodash";
 
-export type Primitive = number | string | boolean;
-
-export type Mock<T> = {
-  [P in keyof T]: T[P] extends (infer U)[]
-    ? (() => U)[]
-    : T[P] extends Primitive
-    ? () => Primitive
-    : T[P] extends () => infer U
-    ? () => U
-    : Mock<T[P]>;
-};
-
-export type MockObject<T> = {
-  [key: string]: Mock<T>;
-};
-
 /*
  * mergeMocks merges mock objects together. Since these mocks are functions, this code
  * merges the evaluated result of the function with the evaluated result of the merged mock
@@ -63,7 +47,7 @@ export function mergeMocks(o1: any, o2: any): any {
   return expanded;
 }
 
-export function expandMockValue<T>(value: Mock<T>, r = 0): any {
+export function expandMockValue(value: any, r = 0): any {
   if (value instanceof Array) {
     const mappedValues = value.map(element => expandMockValue(element, r + 1));
     return () => mappedValues;
