@@ -16,7 +16,7 @@
     "check:lint": "eslint . --ext=ts,js",
     "check:test": "jest test",
     "prepare": "yarn build",
-    "preversion": "yarn lint && yarn test",
+    "preversion": "yarn check:lint && yarn check:test",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
