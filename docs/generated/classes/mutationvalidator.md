@@ -34,7 +34,7 @@
 
 _Inherited from [Validator](validator.md).[constructor](validator.md#constructor)_
 
-_Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/45f9487/src/validators.ts#L19)_
+_Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/65c5310/src/validators.ts#L19)_
 
 **Returns:** [MutationValidator](mutationvalidator.md)
 
@@ -46,7 +46,7 @@ _Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/45f9
 
 _Inherited from [Validator](validator.md).[addCall](validator.md#addcall)_
 
-_Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/45f9487/src/validators.ts#L29)_
+_Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/65c5310/src/validators.ts#L29)_
 
 #### Parameters:
 
@@ -64,6 +64,6 @@ _Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/45f9
 
 _Inherited from [Validator](validator.md).[getCalls](validator.md#getcalls)_
 
-_Defined in [src/validators.ts:25](https://github.com/Flatbook/buzz.js/blob/45f9487/src/validators.ts#L25)_
+_Defined in [src/validators.ts:25](https://github.com/Flatbook/buzz.js/blob/65c5310/src/validators.ts#L25)_
 
 **Returns:** [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables>[]
