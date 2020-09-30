@@ -1,0 +1,9 @@
+{
+  "excludeExternals": true,
+  "excludeNotExported": true,
+  "plugins": ["typedoc-plugin-markdown", "typedoc-plugin-external-module-name"],
+  "out": "./docs/generated",
+  "readme": "none",
+  "mode": "file",
+  "stripInternal": true
+}
