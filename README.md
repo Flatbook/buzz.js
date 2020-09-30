@@ -182,8 +182,9 @@ describe("SimpleComponent", () => {
       loading: true,
     });
 
-    const { getByTestId } = render(<SimpleQueryComponent />);
-    expect(getByTestId("loading-indicator")).not.toBeNull();
+    const { queryByText } = render(<SimpleQueryComponent />);
+    expect(queryByText(/^Loading\.\.\.$/).textContent).not.toBeNull();
+    expect(queryByText(/^ID .*$/)).toBeNull();
   });
 
   it("displays an error message", () => {
@@ -192,7 +193,7 @@ describe("SimpleComponent", () => {
     });
 
     const { getByTestId } = render(<SimpleQueryComponent />);
-    expect(getByTestId("loading-indicator")).not.toBeNull();
+    expect(queryByText(/^Error: test-error$/).textContent).not.toBeNull();
   });
 });
 ```
