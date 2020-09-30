@@ -184,7 +184,7 @@ describe("SimpleComponent", () => {
 
 ### API
 
-For more info, check out the [API docs](./docs).
+For more info, check out the [API docs](./docs/generated).
 
 ### Caveats
 
