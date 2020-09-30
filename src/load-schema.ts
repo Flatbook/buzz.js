@@ -4,7 +4,14 @@
 import { readFileSync } from "fs";
 import { IMocks } from "@graphql-tools/mock";
 
+/**
+ * @ignore
+ */
 let DefaultSchema: string | null = null;
+
+/**
+ * @ignore
+ */
 let DefaultMocks: IMocks = {};
 
 /**

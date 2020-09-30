@@ -22,15 +22,47 @@ interface MockUseQueryOptions<TData = any> {
   response?: TData;
 }
 
+/**
+ * @ignore
+ */
 const useQuerySpies = [
   jest.spyOn(ApolloClientPackage, "useQuery"),
   jest.spyOn(ReactHooksPackage, "useQuery"),
 ];
 
+/**
+ * @ignore
+ */
 const useMutationSpies = [
   jest.spyOn(ApolloClientPackage, "useMutation"),
   jest.spyOn(ReactHooksPackage, "useMutation"),
 ];
+
+/**
+ * @ignore
+ */
+const defaultUseQuery = ReactHooks.useQuery;
+
+/**
+ * @ignore
+ */
+const defaultUseMutation = ReactHooks.useMutation;
+
+/**
+ * @ignore
+ */
+const queryOperationMap: Record<
+  string,
+  { validator: QueryValidator; mockOptions?: MockUseQueryOptions }
+> = {};
+
+/**
+ * @ignore
+ */
+const mutationOperationMap: Record<
+  string,
+  { validator: MutationValidator; mockOptions?: MockUseQueryOptions }
+> = {};
 
 export function restoreMocks(): void {
   useQuerySpies.forEach(spy => spy.mockRestore());
@@ -41,18 +73,6 @@ export function resetMocks(): void {
   useQuerySpies.forEach(spy => spy.mockReset());
   useMutationSpies.forEach(spy => spy.mockReset());
 }
-
-const defaultUseQuery = ReactHooks.useQuery;
-const defaultUseMutation = ReactHooks.useMutation;
-
-const queryOperationMap: Record<
-  string,
-  { validator: QueryValidator; mockOptions?: MockUseQueryOptions }
-> = {};
-const mutationOperationMap: Record<
-  string,
-  { validator: MutationValidator; mockOptions?: MockUseQueryOptions }
-> = {};
 
 /**
  * @ignore

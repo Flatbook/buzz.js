@@ -131,6 +131,21 @@ describe("SimpleComponent", () => {
 });
 ```
 
+`mockUseQuery` and `mockUseMutation` both return validators which you can use to make assertions that your components execute the correct request
+
+```typescript
+describe("SimpleComponent", () => {
+  it("mocks the response with no mocking overhead", () => {
+    const validator = mockUseQuery<TestQueryVariables>("TestQuery");
+
+    const { getByText } = render(<SimpleQueryComponent />);
+
+    expect(validator.getCalls().length).toEqual(1);
+    expect(validator.getCalls()[0].options.variables?.id).toEqual("test-id");
+  });
+});
+```
+
 Need to customize the response? No problem:
 
 ```typescript
