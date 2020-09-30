@@ -18,8 +18,9 @@
     "check:test": "jest test",
     "generate:types": "./bin/generate-types",
     "generate:docs": "typedoc --options ./typedoc.json ./src",
-    "prepare": "yarn generate:docs && yarn build",
+    "prepare": "yarn build",
     "preversion": "yarn check:lint && yarn check:test",
+    "version": "yarn generate:docs && git add docs",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
