@@ -51,6 +51,9 @@ export function mockQueryResponse<TData, TVariables>(
   return merge(result.data, options?.response) as TData;
 }
 
+/**
+ * @ignore
+ */
 function validateDefinitions(
   document: string,
   definitionType: string,

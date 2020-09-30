@@ -7,6 +7,9 @@ import { IMocks } from "@graphql-tools/mock";
 let DefaultSchema: string | null = null;
 let DefaultMocks: IMocks = {};
 
+/**
+ * @ignore
+ */
 export function setDefaultSchema(schema: string): void {
   DefaultSchema = schema;
 }
@@ -15,11 +18,14 @@ export function getDefaultSchema(): string | null {
   return DefaultSchema;
 }
 
+/**
+ * @ignore
+ */
 export function getDefaultMocks(): IMocks {
   return DefaultMocks;
 }
 
-export async function loadSchemaFile(filepath: string): Promise<void> {
+export function loadSchemaFile(filepath: string): void {
   const schema = readFileSync(filepath, "utf8");
 
   setDefaultSchema(schema);

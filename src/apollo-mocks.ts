@@ -54,6 +54,9 @@ const mutationOperationMap: Record<
   { validator: MutationValidator; mockOptions?: MockUseQueryOptions }
 > = {};
 
+/**
+ * @ignore
+ */
 function mockedUseQuery<TData = any, TVariables = OperationVariables>(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables>,
