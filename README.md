@@ -35,7 +35,7 @@ With Buzz, there is _no mocking overhead_ when mocking responses. Buzz will auto
    // jest/buzz.js
    import moment from "moment";
 
-   import { loadSchemaFile, resetMocks, setMocks } from "@sonder/buzz.js";
+   import { loadSchemaFile, setMocks } from "@sonder/buzz.js";
 
    beforeAll(() => {
      loadSchemaFile("./schema.graphql"); // Relative path from the root of your workspace
@@ -44,10 +44,6 @@ With Buzz, there is _no mocking overhead_ when mocking responses. Buzz will auto
      setMocks({
        RFC3339DateTime: () => moment().format(),
      });
-   });
-
-   afterEach(() => {
-     resetMocks();
    });
    ```
 
@@ -117,13 +113,22 @@ const SimpleQueryComponent = (): JSX.Element => {
 We can write our test like the following example:
 
 ```typescript
-import { mockUseQuery } from "@sonder/buzz.js";
+import { mockUseQuery, mockRestore } from "@sonder/buzz.js";
 
+import { TestQuery, TestQueryVariables } from "../generated-types";
 import { SimpleComponent } from "../app";
 
 describe("SimpleComponent", () => {
+  /**
+   * 👈 important! Add this afterAll block to each describe block where mockQuery or mockMutation is used
+   */
+  afterAll(() => {
+    mockRestore();
+  });
+
   it("mocks the response with no mocking overhead", () => {
-    mockUseQuery<TestQueryVariables>("TestQuery");
+    // if you are using typescript, and have generated types, pass the query and variable types
+    mockUseQuery<TestQuery, TestQueryVariables>("TestQuery");
 
     const { getByText } = render(<SimpleQueryComponent />);
     expect(getByText(/^ID: example-id$/).textContent).not.toBeNull();
@@ -136,7 +141,7 @@ describe("SimpleComponent", () => {
 ```typescript
 describe("SimpleComponent", () => {
   it("mocks the response with no mocking overhead", () => {
-    const validator = mockUseQuery<TestQueryVariables>("TestQuery");
+    const validator = mockUseQuery<TestQuery, TestQueryVariables>("TestQuery");
 
     const { getByText } = render(<SimpleQueryComponent />);
 
@@ -149,13 +154,9 @@ describe("SimpleComponent", () => {
 Need to customize the response? No problem:
 
 ```typescript
-import { mockUseQuery } from "@sonder/buzz.js";
-
-import { SimpleComponent } from "../app";
-
 describe("SimpleComponent", () => {
   it("mocks the response with simple overrides", () => {
-    mockUseQuery<TestQueryVariables>("TestQuery", {
+    mockUseQuery<TesQuery, TestQueryVariables>("TestQuery", {
       response: {
         helloWithArgs: {
           // Pass in a partial response to be merged with the mock
@@ -178,7 +179,7 @@ import { SimpleComponent } from "../app";
 
 describe("SimpleComponent", () => {
   it("displays a loading indicator", () => {
-    mockUseQuery<TestQueryVariables>("TestQuery", {
+    mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
       loading: true,
     });
 

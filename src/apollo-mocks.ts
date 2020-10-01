@@ -69,11 +69,6 @@ export function restoreMocks(): void {
   useMutationSpies.forEach(spy => spy.mockRestore());
 }
 
-export function resetMocks(): void {
-  useQuerySpies.forEach(spy => spy.mockReset());
-  useMutationSpies.forEach(spy => spy.mockReset());
-}
-
 /**
  * @ignore
  */
