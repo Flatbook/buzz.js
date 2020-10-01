@@ -8,11 +8,13 @@ import { DocumentNode } from "graphql";
 interface QueryInvocation<TData = any, TVariables = OperationVariables> {
   query: DocumentNode;
   options: QueryHookOptions<TData, TVariables>;
+  result: TData | null;
 }
 
 interface MutationInvocation<TData = any, TVariables = OperationVariables> {
   mutation: DocumentNode;
   options: MutationHookOptions<TData, TVariables>;
+  result: TData | null;
 }
 
 class Validator<InvocationT> {
@@ -24,6 +26,10 @@ class Validator<InvocationT> {
 
   getCalls(): InvocationT[] {
     return this.calls;
+  }
+
+  getMostRecentCall(): InvocationT | undefined {
+    return this.calls[this.calls.length - 1];
   }
 
   addCall(invocation: InvocationT): void {

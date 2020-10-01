@@ -85,7 +85,7 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
     variables: options.variables,
   });
 
-  validator.addCall({ query, options });
+  validator.addCall({ query, options, result: data });
 
   return {
     data: !mockOptions?.error && !mockOptions?.loading && (data as TData),
@@ -157,19 +157,21 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
       const { validator, mockOptions } = storedMock;
 
       const mutationFn = async (
-        options: MutationFunctionOptions<TData, TVariables>,
+        invocationOptions: MutationFunctionOptions<TData, TVariables>,
       ) => {
+        const data = mockQueryResponse<TData, TVariables>(mutationString, {
+          response: mockOptions?.response,
+          variables: invocationOptions?.variables,
+        });
         // @ts-ignore only need to store the options used
-        validator.addCall({ mutation, options });
+        validator.addCall({ mutation, options, result: data });
+
+        return { data };
       };
 
       const mutationString = mutation.loc.source.body;
 
-      const data = mockQueryResponse<TData, TVariables>(mutationString, {
-        response: mockOptions?.response,
-        variables: options?.variables,
-      });
-
+      const data = validator.getMostRecentCall()?.result;
       return [
         // @ts-ignore intentionally incomplete
         mutationFn,
