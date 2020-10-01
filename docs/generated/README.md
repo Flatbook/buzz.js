@@ -31,7 +31,6 @@
 - [mockQueryResponse](README.md#mockqueryresponse)
 - [mockUseMutation](README.md#mockusemutation)
 - [mockUseQuery](README.md#mockusequery)
-- [resetMocks](README.md#resetmocks)
 - [restoreMocks](README.md#restoremocks)
 - [setMocks](README.md#setmocks)
 
@@ -41,7 +40,7 @@
 
 Ƭ **RecursivePartial**\<T>: {}
 
-_Defined in [src/RecursivePartial.ts:1](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/RecursivePartial.ts#L1)_
+_Defined in [src/RecursivePartial.ts:1](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/RecursivePartial.ts#L1)_
 
 #### Type parameters:
 
@@ -55,7 +54,7 @@ _Defined in [src/RecursivePartial.ts:1](https://github.com/Flatbook/buzz.js/blob
 
 ▸ **getDefaultSchema**(): string \| null
 
-_Defined in [src/load-schema.ts:24](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/load-schema.ts#L24)_
+_Defined in [src/load-schema.ts:24](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/load-schema.ts#L24)_
 
 **Returns:** string \| null
 
@@ -65,7 +64,7 @@ _Defined in [src/load-schema.ts:24](https://github.com/Flatbook/buzz.js/blob/fad
 
 ▸ **loadSchemaFile**(`filepath`: string): void
 
-_Defined in [src/load-schema.ts:35](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/load-schema.ts#L35)_
+_Defined in [src/load-schema.ts:35](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/load-schema.ts#L35)_
 
 #### Parameters:
 
@@ -81,7 +80,7 @@ _Defined in [src/load-schema.ts:35](https://github.com/Flatbook/buzz.js/blob/fad
 
 ▸ **mockQueryResponse**\<TData, TVariables>(`query`: string, `options?`: [MockedQueryResponseOptions](interfaces/mockedqueryresponseoptions.md)\<TVariables>): TData
 
-_Defined in [src/mock.ts:22](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/mock.ts#L22)_
+_Defined in [src/mock.ts:22](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/mock.ts#L22)_
 
 #### Type parameters:
 
@@ -105,7 +104,7 @@ _Defined in [src/mock.ts:22](https://github.com/Flatbook/buzz.js/blob/fad7f48/sr
 
 ▸ **mockUseMutation**\<TData, TVariables>(`operationName`: string, `mockOptions?`: [MockUseQueryOptions](interfaces/mockusequeryoptions.md)): [MutationValidator](classes/mutationvalidator.md)
 
-_Defined in [src/apollo-mocks.ts:141](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/apollo-mocks.ts#L141)_
+_Defined in [src/apollo-mocks.ts:136](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/apollo-mocks.ts#L136)_
 
 #### Type parameters:
 
@@ -129,7 +128,7 @@ _Defined in [src/apollo-mocks.ts:141](https://github.com/Flatbook/buzz.js/blob/f
 
 ▸ **mockUseQuery**\<TData, TVariables>(`operationName`: string, `mockOptions?`: [MockUseQueryOptions](interfaces/mockusequeryoptions.md)): [QueryValidator](classes/queryvalidator.md)
 
-_Defined in [src/apollo-mocks.ts:104](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/apollo-mocks.ts#L104)_
+_Defined in [src/apollo-mocks.ts:99](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/apollo-mocks.ts#L99)_
 
 #### Type parameters:
 
@@ -149,21 +148,11 @@ _Defined in [src/apollo-mocks.ts:104](https://github.com/Flatbook/buzz.js/blob/f
 
 ---
 
-### resetMocks
-
-▸ **resetMocks**(): void
-
-_Defined in [src/apollo-mocks.ts:72](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/apollo-mocks.ts#L72)_
-
-**Returns:** void
-
----
-
 ### restoreMocks
 
 ▸ **restoreMocks**(): void
 
-_Defined in [src/apollo-mocks.ts:67](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/apollo-mocks.ts#L67)_
+_Defined in [src/apollo-mocks.ts:67](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/apollo-mocks.ts#L67)_
 
 **Returns:** void
 
@@ -173,7 +162,7 @@ _Defined in [src/apollo-mocks.ts:67](https://github.com/Flatbook/buzz.js/blob/fa
 
 ▸ **setMocks**(`mocks`: IMocks): void
 
-_Defined in [src/load-schema.ts:41](https://github.com/Flatbook/buzz.js/blob/fad7f48/src/load-schema.ts#L41)_
+_Defined in [src/load-schema.ts:41](https://github.com/Flatbook/buzz.js/blob/36e11f3/src/load-schema.ts#L41)_
 
 #### Parameters:
 
