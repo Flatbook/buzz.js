@@ -30,6 +30,7 @@
 
 - [addCall](validator.md#addcall)
 - [getCalls](validator.md#getcalls)
+- [getMostRecentCall](validator.md#getmostrecentcall)
 
 ## Constructors
 
@@ -37,7 +38,7 @@
 
 \+ **new Validator**(): [Validator](validator.md)
 
-_Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L19)_
+_Defined in [src/validators.ts:21](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L21)_
 
 **Returns:** [Validator](validator.md)
 
@@ -47,7 +48,7 @@ _Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/aaae
 
 • `Private` **calls**: InvocationT[]
 
-_Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L19)_
+_Defined in [src/validators.ts:21](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L21)_
 
 ## Methods
 
@@ -55,7 +56,7 @@ _Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/aaae
 
 ▸ **addCall**(`invocation`: InvocationT): void
 
-_Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L29)_
+_Defined in [src/validators.ts:35](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L35)_
 
 #### Parameters:
 
@@ -71,6 +72,16 @@ _Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/aaae
 
 ▸ **getCalls**(): InvocationT[]
 
-_Defined in [src/validators.ts:25](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L25)_
+_Defined in [src/validators.ts:27](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L27)_
 
 **Returns:** InvocationT[]
+
+---
+
+### getMostRecentCall
+
+▸ **getMostRecentCall**(): InvocationT \| undefined
+
+_Defined in [src/validators.ts:31](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L31)_
+
+**Returns:** InvocationT \| undefined

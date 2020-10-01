@@ -25,6 +25,7 @@
 
 - [addCall](mutationvalidator.md#addcall)
 - [getCalls](mutationvalidator.md#getcalls)
+- [getMostRecentCall](mutationvalidator.md#getmostrecentcall)
 
 ## Constructors
 
@@ -34,7 +35,7 @@
 
 _Inherited from [Validator](validator.md).[constructor](validator.md#constructor)_
 
-_Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L19)_
+_Defined in [src/validators.ts:21](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L21)_
 
 **Returns:** [MutationValidator](mutationvalidator.md)
 
@@ -46,7 +47,7 @@ _Defined in [src/validators.ts:19](https://github.com/Flatbook/buzz.js/blob/aaae
 
 _Inherited from [Validator](validator.md).[addCall](validator.md#addcall)_
 
-_Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L29)_
+_Defined in [src/validators.ts:35](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L35)_
 
 #### Parameters:
 
@@ -64,6 +65,18 @@ _Defined in [src/validators.ts:29](https://github.com/Flatbook/buzz.js/blob/aaae
 
 _Inherited from [Validator](validator.md).[getCalls](validator.md#getcalls)_
 
-_Defined in [src/validators.ts:25](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L25)_
+_Defined in [src/validators.ts:27](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L27)_
 
 **Returns:** [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables>[]
+
+---
+
+### getMostRecentCall
+
+▸ **getMostRecentCall**(): [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables> \| undefined
+
+_Inherited from [Validator](validator.md).[getMostRecentCall](validator.md#getmostrecentcall)_
+
+_Defined in [src/validators.ts:31](https://github.com/Flatbook/buzz.js/blob/2a61bf4/src/validators.ts#L31)_
+
+**Returns:** [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables> \| undefined
