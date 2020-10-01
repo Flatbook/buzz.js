@@ -26,7 +26,7 @@
 
 • **options**: QueryHookOptions\<TData, TVariables>
 
-_Defined in [src/validators.ts:10](https://github.com/Flatbook/buzz.js/blob/50eafec/src/validators.ts#L10)_
+_Defined in [src/validators.ts:10](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L10)_
 
 ---
 
@@ -34,4 +34,4 @@ _Defined in [src/validators.ts:10](https://github.com/Flatbook/buzz.js/blob/50ea
 
 • **query**: DocumentNode
 
-_Defined in [src/validators.ts:9](https://github.com/Flatbook/buzz.js/blob/50eafec/src/validators.ts#L9)_
+_Defined in [src/validators.ts:9](https://github.com/Flatbook/buzz.js/blob/aaae1eb/src/validators.ts#L9)_
