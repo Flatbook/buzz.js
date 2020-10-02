@@ -113,7 +113,7 @@ const SimpleQueryComponent = (): JSX.Element => {
 We can write our test like the following example:
 
 ```typescript
-import { mockUseQuery, mockRestore } from "@sonder/buzz.js";
+import { mockUseQuery, restoreMocks } from "@sonder/buzz.js";
 
 import { TestQuery, TestQueryVariables } from "../generated-types";
 import { SimpleComponent } from "../app";
@@ -123,7 +123,7 @@ describe("SimpleComponent", () => {
    * 👈 important! Add this afterAll block to each describe block where mockQuery or mockMutation is used
    */
   afterAll(() => {
-    mockRestore();
+    restoreMocks();
   });
 
   it("mocks the response with no mocking overhead", () => {
