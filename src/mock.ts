@@ -5,7 +5,7 @@ import { isDocumentString } from "@graphql-tools/utils";
 import { ExecutionResult, graphqlSync } from "graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { OperationVariables } from "@apollo/client";
-import { merge } from "lodash";
+import { isArray, mergeWith } from "lodash";
 
 import { getDefaultMocks, getDefaultSchema } from "./load-schema";
 import { GraphQLExecutionError } from "./GraphQLExecutionError";
@@ -21,7 +21,7 @@ interface MockedQueryResponseOptions<
 
 export function mockQueryResponse<TData, TVariables>(
   query: string,
-  options?: MockedQueryResponseOptions<TVariables>,
+  options?: MockedQueryResponseOptions<TData, TVariables>,
 ): TData {
   if (!isDocumentString(query)) {
     throw new Error("query is not a valid GraphQL document");
@@ -48,7 +48,22 @@ export function mockQueryResponse<TData, TVariables>(
     throw new GraphQLExecutionError([...result.errors]);
   }
 
-  return merge(result.data, options?.response) as TData;
+  return mergeResult(result.data, options?.response) as TData;
+}
+
+function mergeResult<TData>(
+  result: TData,
+  response: RecursivePartial<TData> | undefined,
+): TData {
+  if (!response) {
+    return result;
+  }
+
+  return mergeWith(result, response, (obj, src) => {
+    if (isArray(src)) {
+      return src;
+    }
+  });
 }
 
 /**
