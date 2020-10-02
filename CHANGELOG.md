@@ -1,3 +1,7 @@
+## buzz.js 0.2.12
+
+- Update merge function to recursively merge array values
+
 ## buzz.js 0.2.11
 
 - Add CHANGELOG.md

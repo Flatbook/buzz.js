@@ -28,7 +28,6 @@
 
 - [getDefaultSchema](README.md#getdefaultschema)
 - [loadSchemaFile](README.md#loadschemafile)
-- [mergeResult](README.md#mergeresult)
 - [mockQueryResponse](README.md#mockqueryresponse)
 - [mockUseMutation](README.md#mockusemutation)
 - [mockUseQuery](README.md#mockusequery)
@@ -41,7 +40,7 @@
 
 Ƭ **RecursivePartial**\<T>: {}
 
-_Defined in [src/RecursivePartial.ts:1](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/RecursivePartial.ts#L1)_
+_Defined in [src/RecursivePartial.ts:1](https://github.com/Flatbook/buzz.js/blob/03df908/src/RecursivePartial.ts#L1)_
 
 #### Type parameters:
 
@@ -55,7 +54,7 @@ _Defined in [src/RecursivePartial.ts:1](https://github.com/Flatbook/buzz.js/blob
 
 ▸ **getDefaultSchema**(): string \| null
 
-_Defined in [src/load-schema.ts:24](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/load-schema.ts#L24)_
+_Defined in [src/load-schema.ts:24](https://github.com/Flatbook/buzz.js/blob/03df908/src/load-schema.ts#L24)_
 
 **Returns:** string \| null
 
@@ -65,7 +64,7 @@ _Defined in [src/load-schema.ts:24](https://github.com/Flatbook/buzz.js/blob/47e
 
 ▸ **loadSchemaFile**(`filepath`: string): void
 
-_Defined in [src/load-schema.ts:35](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/load-schema.ts#L35)_
+_Defined in [src/load-schema.ts:35](https://github.com/Flatbook/buzz.js/blob/03df908/src/load-schema.ts#L35)_
 
 #### Parameters:
 
@@ -77,34 +76,11 @@ _Defined in [src/load-schema.ts:35](https://github.com/Flatbook/buzz.js/blob/47e
 
 ---
 
-### mergeResult
-
-▸ **mergeResult**\<TData>(`result`: TData, `response`: [RecursivePartial](README.md#recursivepartial)\<TData> \| undefined): TData
-
-_Defined in [src/mock.ts:54](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/mock.ts#L54)_
-
-#### Type parameters:
-
-| Name    |
-| ------- |
-| `TData` |
-
-#### Parameters:
-
-| Name       | Type                                                                |
-| ---------- | ------------------------------------------------------------------- |
-| `result`   | TData                                                               |
-| `response` | [RecursivePartial](README.md#recursivepartial)\<TData> \| undefined |
-
-**Returns:** TData
-
----
-
 ### mockQueryResponse
 
 ▸ **mockQueryResponse**\<TData, TVariables>(`query`: string, `options?`: [MockedQueryResponseOptions](interfaces/mockedqueryresponseoptions.md)\<TData, TVariables>): TData
 
-_Defined in [src/mock.ts:22](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/mock.ts#L22)_
+_Defined in [src/mock.ts:22](https://github.com/Flatbook/buzz.js/blob/03df908/src/mock.ts#L22)_
 
 #### Type parameters:
 
@@ -128,7 +104,7 @@ _Defined in [src/mock.ts:22](https://github.com/Flatbook/buzz.js/blob/47e4c32/sr
 
 ▸ **mockUseMutation**\<TData, TVariables>(`operationName`: string, `mockOptions?`: [MockUseQueryOptions](interfaces/mockusequeryoptions.md)): [MutationValidator](classes/mutationvalidator.md)
 
-_Defined in [src/apollo-mocks.ts:136](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/apollo-mocks.ts#L136)_
+_Defined in [src/apollo-mocks.ts:136](https://github.com/Flatbook/buzz.js/blob/03df908/src/apollo-mocks.ts#L136)_
 
 #### Type parameters:
 
@@ -152,7 +128,7 @@ _Defined in [src/apollo-mocks.ts:136](https://github.com/Flatbook/buzz.js/blob/4
 
 ▸ **mockUseQuery**\<TData, TVariables>(`operationName`: string, `mockOptions?`: [MockUseQueryOptions](interfaces/mockusequeryoptions.md)): [QueryValidator](classes/queryvalidator.md)
 
-_Defined in [src/apollo-mocks.ts:99](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/apollo-mocks.ts#L99)_
+_Defined in [src/apollo-mocks.ts:99](https://github.com/Flatbook/buzz.js/blob/03df908/src/apollo-mocks.ts#L99)_
 
 #### Type parameters:
 
@@ -176,7 +152,7 @@ _Defined in [src/apollo-mocks.ts:99](https://github.com/Flatbook/buzz.js/blob/47
 
 ▸ **restoreMocks**(): void
 
-_Defined in [src/apollo-mocks.ts:67](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/apollo-mocks.ts#L67)_
+_Defined in [src/apollo-mocks.ts:67](https://github.com/Flatbook/buzz.js/blob/03df908/src/apollo-mocks.ts#L67)_
 
 **Returns:** void
 
@@ -186,7 +162,7 @@ _Defined in [src/apollo-mocks.ts:67](https://github.com/Flatbook/buzz.js/blob/47
 
 ▸ **setMocks**(`mocks`: IMocks): void
 
-_Defined in [src/load-schema.ts:41](https://github.com/Flatbook/buzz.js/blob/47e4c32/src/load-schema.ts#L41)_
+_Defined in [src/load-schema.ts:41](https://github.com/Flatbook/buzz.js/blob/03df908/src/load-schema.ts#L41)_
 
 #### Parameters:
 
