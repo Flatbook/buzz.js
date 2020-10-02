@@ -1,6 +1,12 @@
 #!/bin/bash
 
-echo "Please update changelog, then press enter"
+echo "COMMITS SINCE LAST TAG"
+echo
+echo "======================"
+git log $(git describe --tags --abbrev=0)..HEAD --pretty='format:%ad%x20%s%x20%x28%an%x29' --date=short
+echo "======================"
+echo
+echo "Please update CHANGELOG.md, then press enter"
 read
 
 yarn generate:docs
