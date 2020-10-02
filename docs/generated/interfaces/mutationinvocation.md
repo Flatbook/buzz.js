@@ -27,15 +27,15 @@
 
 • **mutation**: DocumentNode
 
-_Defined in [src/validators.ts:15](https://github.com/Flatbook/buzz.js/blob/3986c39/src/validators.ts#L15)_
+_Defined in [src/validators.ts:15](https://github.com/Flatbook/buzz.js/blob/70f8e7c/src/validators.ts#L15)_
 
 ---
 
 ### options
 
-• **options**: MutationHookOptions\<TData, TVariables>
+• **options**: MutationFunctionOptions\<TData, TVariables>
 
-_Defined in [src/validators.ts:16](https://github.com/Flatbook/buzz.js/blob/3986c39/src/validators.ts#L16)_
+_Defined in [src/validators.ts:16](https://github.com/Flatbook/buzz.js/blob/70f8e7c/src/validators.ts#L16)_
 
 ---
 
@@ -43,4 +43,4 @@ _Defined in [src/validators.ts:16](https://github.com/Flatbook/buzz.js/blob/3986
 
 • **result**: TData \| null
 
-_Defined in [src/validators.ts:17](https://github.com/Flatbook/buzz.js/blob/3986c39/src/validators.ts#L17)_
+_Defined in [src/validators.ts:17](https://github.com/Flatbook/buzz.js/blob/70f8e7c/src/validators.ts#L17)_
