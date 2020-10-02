@@ -20,7 +20,7 @@
     "generate:docs": "typedoc --options ./typedoc.json ./src",
     "prepare": "yarn build",
     "preversion": "yarn check:lint && yarn check:test",
-    "version": "yarn generate:docs && git add docs",
+    "version": "./bin/version",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
