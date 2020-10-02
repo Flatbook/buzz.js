@@ -1,5 +1,5 @@
 import {
-  MutationHookOptions,
+  MutationFunctionOptions,
   QueryHookOptions,
   OperationVariables,
 } from "@apollo/client";
@@ -13,7 +13,7 @@ interface QueryInvocation<TData = any, TVariables = OperationVariables> {
 
 interface MutationInvocation<TData = any, TVariables = OperationVariables> {
   mutation: DocumentNode;
-  options: MutationHookOptions<TData, TVariables>;
+  options: MutationFunctionOptions<TData, TVariables>;
   result: TData | null;
 }
 

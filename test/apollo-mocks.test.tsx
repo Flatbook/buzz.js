@@ -90,6 +90,9 @@ describe("mockUseMutation", () => {
       fireEvent.click(getByText("mutate!"));
 
       expect(mutationValidator.getCalls().length).toEqual(1);
+      expect(mutationValidator.getMostRecentCall().options?.variables).toEqual({
+        id: "example-id",
+      });
     });
   });
 });

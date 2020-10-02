@@ -5,8 +5,8 @@ import { useMutation } from "@apollo/client";
 
 const SimpleMutationComponent = (): JSX.Element => {
   const mutation = gql`
-    mutation TestMutation {
-      helloMutation {
+    mutation TestMutation($id: ID!) {
+      helloWithArgsMutation(id: $id) {
         id
       }
     }
@@ -15,7 +15,11 @@ const SimpleMutationComponent = (): JSX.Element => {
   const [mutate] = useMutation(mutation);
 
   const handleClick = () => {
-    mutate();
+    mutate({
+      variables: {
+        id: "example-id",
+      },
+    });
   };
 
   return <button onClick={handleClick}>mutate!</button>;

@@ -163,8 +163,12 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
           response: mockOptions?.response,
           variables: invocationOptions?.variables,
         });
-        // @ts-ignore only need to store the options used
-        validator.addCall({ mutation, options, result: data });
+
+        validator.addCall({
+          mutation,
+          options: invocationOptions,
+          result: data,
+        });
 
         return { data };
       };

@@ -6,6 +6,7 @@ type HelloResponse {
 
 type Mutation {
   helloMutation: HelloResponse!
+  helloWithArgsMutation(id: ID!): HelloResponse!
 }
 
 type Query {
