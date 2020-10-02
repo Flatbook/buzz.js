@@ -51,7 +51,10 @@ export function mockQueryResponse<TData, TVariables>(
   return mergeResult(result.data, options?.response) as TData;
 }
 
-function mergeResult<TData>(
+/**
+ * @ignore
+ */
+export function mergeResult<TData>(
   result: TData,
   response: RecursivePartial<TData> | undefined,
 ): TData {
@@ -61,6 +64,17 @@ function mergeResult<TData>(
 
   return mergeWith(result, response, (obj, src) => {
     if (isArray(src)) {
+      if (isArray(obj)) {
+        let resArr = [];
+        for (let i = 0; i < Math.min(obj.length, src.length); i++) {
+          resArr.push(mergeResult(obj[i], src[i]));
+        }
+        if (resArr.length < src.length) {
+          resArr = resArr.concat(src.slice(resArr.length));
+        }
+
+        return resArr;
+      }
       return src;
     }
   });
