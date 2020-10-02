@@ -186,7 +186,7 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
     }
   };
 
-  useMutationSpies.forEach(spy => spy.mockImplementation(mockFn));
+  useMutationSpies.forEach(spy => spy.mockImplementationOnce(mockFn));
 
   const validator = new MutationValidator();
   mutationOperationMap[operationName] = {

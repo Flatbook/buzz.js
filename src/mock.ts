@@ -64,7 +64,7 @@ function validateDefinitions(
 
   return (
     definitions.length > 0 &&
-    definitions.filter(definition => definition.kind !== definitionType)
-      .length === 0
+    definitions.filter(definition => definition.kind === definitionType)
+      .length > 0
   );
 }
