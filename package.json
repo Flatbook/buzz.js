@@ -1,6 +1,6 @@
 {
   "name": "@sonder/buzz.js",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "Tools for mocking graphql queries and fragments",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,10 +1,14 @@
+## buzz.js 0.2.13
+
+- Remove usages of `mockImplementationOnce` in favor of `mockImplementation`.
+
 ## buzz.js 0.2.12
 
-- Update merge function to recursively merge array values
+- Update merge function to recursively merge array values.
 
 ## buzz.js 0.2.11
 
-- Add CHANGELOG.md
+- Add CHANGELOG.md.
 
 ## buzz.js 0.2.10
 
