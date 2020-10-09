@@ -1,3 +1,7 @@
+## buzz.js 0.3.0
+
+- Cache and returned cached responses after the first call to `useQuery` or `useMutation`.
+
 ## buzz.js 0.2.13
 
 - Remove usages of `mockImplementationOnce` in favor of `mockImplementation`.
