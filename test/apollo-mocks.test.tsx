@@ -1,14 +1,14 @@
 import React from "react";
 import gql from "graphql-tag";
 
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ApolloError } from "@apollo/client";
 
 import { loadSchemaFile, setMocks } from "../src";
 import { mockUseMutation, mockUseQuery } from "../src/apollo-mocks";
 
 import {
-  SimpleMutationComponent,
+  MutationEmitter,
   SimpleQueryComponent,
   TestQuery,
   TestQueryVariables,
@@ -164,19 +164,131 @@ describe("mockUseQuery", () => {
   });
 });
 
-// describe("mockUseMutation", () => {
-//   describe("on mutate", () => {
-//     it("mocks out mutation", () => {
-//       mockUseQuery("TestMutation");
-//       const mutationValidator = mockUseMutation("TestMutation");
-//
-//       const { getByText } = render(<SimpleMutationComponent />);
-//       fireEvent.click(getByText("mutate!"));
-//
-//       expect(mutationValidator.getCalls().length).toEqual(1);
-//       expect(mutationValidator.getMostRecentCall().options?.variables).toEqual({
-//         id: "example-id",
-//       });
-//     });
-//   });
-// });
+describe("mockUseMutation", () => {
+  const mutation = gql`
+    mutation TestMutation($id: ID!) {
+      helloWithArgsMutation(id: $id) {
+        id
+        message
+      }
+    }
+  `;
+
+  describe("on mutate", () => {
+    it("mocks out mutation", () => {
+      const mutationValidator = mockUseMutation("TestMutation");
+      const mutationEmitter = new MutationEmitter();
+
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          mutationEmitter={mutationEmitter}
+          variables={{
+            id: "example-id",
+          }}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(mutationValidator.getCalls().length).toEqual(1);
+      expect(mutationValidator.getMostRecentCall().options?.variables).toEqual({
+        id: "example-id",
+      });
+    });
+  });
+
+  describe("loading state", () => {
+    it("renders loading state", () => {
+      mockUseMutation("TestMutation", {
+        loading: true,
+      });
+      const mutationEmitter = new MutationEmitter();
+
+      const onLoading = jest.fn();
+      const onData = jest.fn();
+      const onError = jest.fn();
+
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          variables={{ id: "test-input-id" }}
+          onLoading={onLoading}
+          onData={onData}
+          onError={onError}
+          mutationEmitter={mutationEmitter}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(onLoading).toHaveBeenCalledWith(true);
+      expect(onData).toHaveBeenCalledWith(null);
+      expect(onError).toHaveBeenCalledWith(null);
+    });
+  });
+
+  describe("error state", () => {
+    it("renders error message", () => {
+      mockUseMutation("TestMutation", {
+        error: new ApolloError({ errorMessage: "test-error" }),
+      });
+      const mutationEmitter = new MutationEmitter();
+
+      const onLoading = jest.fn();
+      const onData = jest.fn();
+      const onError = jest.fn();
+
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          variables={{ id: "test-input-id" }}
+          onLoading={onLoading}
+          onData={onData}
+          onError={onError}
+          mutationEmitter={mutationEmitter}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(onData).toHaveBeenCalledWith(null);
+      expect(onLoading).toHaveBeenCalledWith(false);
+      expect(onError).toHaveBeenCalledWith(expect.any(ApolloError));
+    });
+  });
+
+  describe("with additionalMocks", () => {
+    it("overiddes original mock", () => {
+      mockUseMutation("TestMutation", {
+        response: {
+          helloWithArgs: {
+            message: "example-message",
+          },
+        },
+      });
+      const mutationEmitter = new MutationEmitter();
+
+      const onLoading = jest.fn();
+      const onData = jest.fn();
+      const onError = jest.fn();
+
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          variables={{ id: "test-input-id" }}
+          onLoading={onLoading}
+          onData={onData}
+          onError={onError}
+          mutationEmitter={mutationEmitter}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(onData).toHaveBeenCalled();
+      expect(onLoading).toHaveBeenCalledWith(false);
+      expect(onError).toHaveBeenCalledWith(null);
+    });
+  });
+});

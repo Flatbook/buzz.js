@@ -1,5 +1,3 @@
-import { EventEmitter } from "events";
-
 import {
   ApolloError,
   useMutation,
@@ -8,13 +6,7 @@ import {
 } from "@apollo/client";
 import { DocumentNode, OperationDefinitionNode } from "graphql";
 
-const MUTATION_EMIT_KEY = "call_mutation";
-
-class MutationEmitter extends EventEmitter {
-  callMutation() {
-    this.emit(MUTATION_EMIT_KEY);
-  }
-}
+import { MutationEmitter, MUTATION_EMIT_KEY } from "./MutationEmitter";
 
 interface TestProps<TData = any, TVariables = OperationVariables> {
   query: DocumentNode;
@@ -43,7 +35,6 @@ function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
     });
     onLoading?.(loading);
     onData?.(data);
-    debugger;
     onError?.(error);
   } else if (
     (query.definitions[0] as OperationDefinitionNode).operation === "mutation"
@@ -51,15 +42,13 @@ function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
     const [mutationFn, { data, error, loading }] = useMutation<
       TData,
       TVariables
-    >(query, {
-      variables,
-    });
+    >(query);
     onLoading?.(loading);
     onData?.(data);
     onError?.(error);
 
     mutationEmitter.on(MUTATION_EMIT_KEY, () => {
-      mutationFn();
+      mutationFn({ variables });
     });
   }
 
