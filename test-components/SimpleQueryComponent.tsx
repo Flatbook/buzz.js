@@ -1,40 +1,58 @@
-import React from "react";
-import gql from "graphql-tag";
+import {
+  ApolloError,
+  useMutation,
+  useQuery,
+  OperationVariables,
+} from "@apollo/client";
+import { DocumentNode, OperationDefinitionNode } from "graphql";
 
-import { useQuery } from "@apollo/client";
+import { MutationEmitter, MUTATION_EMIT_KEY } from "./MutationEmitter";
 
-const SimpleQueryComponent = (): JSX.Element => {
-  const query = gql`
-    query TestQuery($id: ID!) {
-      helloWithArgs(id: $id) {
-        id
-        hello
-        message
-      }
-    }
-  `;
+interface TestProps<TData = any, TVariables = OperationVariables> {
+  query: DocumentNode;
+  variables?: TVariables;
+  onData?: (data: TData) => void;
+  onError?: (error: ApolloError) => void;
+  onLoading?: (loading: boolean) => void;
+  mutationEmitter?: MutationEmitter;
+}
 
-  const { data, loading, error } = useQuery(query, {
-    variables: {
-      id: "test-input-id",
-    },
-  });
+function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
+  props: TestProps<TData, TVariables>,
+): null {
+  const {
+    query,
+    variables,
+    onData,
+    onError,
+    onLoading,
+    mutationEmitter,
+  } = props;
 
-  if (data) {
-    const { message, id } = data.helloWithArgs;
-    return (
-      <>
-        <div>ID: {id}</div>
-        {message && <div>Message: {message}</div>}
-      </>
-    );
+  if ((query.definitions[0] as OperationDefinitionNode).operation === "query") {
+    const { data, loading, error } = useQuery<TData, TVariables>(query, {
+      variables,
+    });
+    onLoading?.(loading);
+    onData?.(data);
+    onError?.(error);
+  } else if (
+    (query.definitions[0] as OperationDefinitionNode).operation === "mutation"
+  ) {
+    const [mutationFn, { data, error, loading }] = useMutation<
+      TData,
+      TVariables
+    >(query);
+    onLoading?.(loading);
+    onData?.(data);
+    onError?.(error);
+
+    mutationEmitter.on(MUTATION_EMIT_KEY, () => {
+      mutationFn({ variables });
+    });
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  } else if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-};
+  return null;
+}
 
 export default SimpleQueryComponent;
