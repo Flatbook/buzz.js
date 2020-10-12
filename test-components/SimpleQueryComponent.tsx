@@ -47,8 +47,9 @@ function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
     onData?.(data);
     onError?.(error);
 
-    mutationEmitter.on(MUTATION_EMIT_KEY, () => {
-      mutationFn({ variables });
+    mutationEmitter.on(MUTATION_EMIT_KEY, async () => {
+      const { data } = await mutationFn({ variables });
+      mutationEmitter?.mutationResult(data);
     });
   }
 

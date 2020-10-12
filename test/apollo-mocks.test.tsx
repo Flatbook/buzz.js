@@ -175,7 +175,7 @@ describe("mockUseMutation", () => {
   `;
 
   describe("on mutate", () => {
-    it("mocks out mutation", () => {
+    it("mocks out mutation", async () => {
       const mutationValidator = mockUseMutation("TestMutation");
       const mutationEmitter = new MutationEmitter();
 
@@ -191,9 +191,18 @@ describe("mockUseMutation", () => {
 
       mutationEmitter.callMutation();
 
-      expect(mutationValidator.getCalls().length).toEqual(1);
-      expect(mutationValidator.getMostRecentCall().options?.variables).toEqual({
-        id: "example-id",
+      return new Promise(res => {
+        expect(mutationValidator.getCalls().length).toEqual(1);
+        expect(
+          mutationValidator.getMostRecentCall().options?.variables,
+        ).toEqual({
+          id: "example-id",
+        });
+
+        mutationEmitter.onMutationResult(data => {
+          expect(data).not.toBeNull();
+          res();
+        });
       });
     });
   });

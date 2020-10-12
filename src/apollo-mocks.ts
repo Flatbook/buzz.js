@@ -3,6 +3,7 @@ import * as ReactHooksPackage from "@apollo/react-hooks";
 
 import {
   ApolloError,
+  FetchResult,
   MutationFunctionOptions,
   MutationHookOptions,
   MutationTuple,
@@ -178,11 +179,11 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
     } else {
       const { validator, mockOptions, storedResponse } = storedMock;
 
-      const mutationFn = (
+      const mutationFn = async (
         invocationOptions: MutationFunctionOptions<TData, TVariables>,
-      ) => {
+      ): Promise<FetchResult<TData>> => {
         const data =
-          storedResponse ||
+          (storedResponse as TData) ||
           mockQueryResponse<TData, TVariables>(mutationString, {
             response: mockOptions?.response,
             variables: invocationOptions?.variables,
@@ -199,7 +200,7 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
           storedResponse: data,
         };
 
-        return data;
+        return { data };
       };
 
       const mutationString = mutation.loc.source.body;
