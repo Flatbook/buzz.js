@@ -1,3 +1,7 @@
+## buzz.js 0.3.1
+
+- Provides a fix for improper return value from mutation functions
+
 ## buzz.js 0.3.0
 
 - Cache and returned cached responses after the first call to `useQuery` or `useMutation`.

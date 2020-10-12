@@ -26,7 +26,7 @@
 
 • `Optional` **error**: ApolloError
 
-_Defined in [src/apollo-mocks.ts:19](https://github.com/Flatbook/buzz.js/blob/81fe7d5/src/apollo-mocks.ts#L19)_
+_Defined in [src/apollo-mocks.ts:20](https://github.com/Flatbook/buzz.js/blob/2515820/src/apollo-mocks.ts#L20)_
 
 ---
 
@@ -34,7 +34,7 @@ _Defined in [src/apollo-mocks.ts:19](https://github.com/Flatbook/buzz.js/blob/81
 
 • `Optional` **loading**: boolean
 
-_Defined in [src/apollo-mocks.ts:20](https://github.com/Flatbook/buzz.js/blob/81fe7d5/src/apollo-mocks.ts#L20)_
+_Defined in [src/apollo-mocks.ts:21](https://github.com/Flatbook/buzz.js/blob/2515820/src/apollo-mocks.ts#L21)_
 
 ---
 
@@ -42,4 +42,4 @@ _Defined in [src/apollo-mocks.ts:20](https://github.com/Flatbook/buzz.js/blob/81
 
 • `Optional` **response**: TData
 
-_Defined in [src/apollo-mocks.ts:21](https://github.com/Flatbook/buzz.js/blob/81fe7d5/src/apollo-mocks.ts#L21)_
+_Defined in [src/apollo-mocks.ts:22](https://github.com/Flatbook/buzz.js/blob/2515820/src/apollo-mocks.ts#L22)_
