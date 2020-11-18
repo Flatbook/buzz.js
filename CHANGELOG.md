@@ -1,3 +1,7 @@
+## buzz.js 0.3.2
+
+- Export `QueryValidator` and `MutationValidator` types
+
 ## buzz.js 0.3.1
 
 - Provides a fix for improper return value from mutation functions
