@@ -166,7 +166,7 @@ describe("SimpleComponent", () => {
     });
 
     const { getByText } = render(<SimpleQueryComponent />);
-    expect(getByText(/^ID: example-id$/).textContent).not.toBeNull();
+    expect(getByText(/^Message: .*$/).textContent).not.toBeNull();
   });
 });
 ```
@@ -185,7 +185,7 @@ describe("SimpleComponent", () => {
 
     const { queryByText } = render(<SimpleQueryComponent />);
     expect(queryByText(/^Loading\.\.\.$/).textContent).not.toBeNull();
-    expect(queryByText(/^ID .*$/)).toBeNull();
+    expect(queryByText(/^ID: .*$/)).toBeNull();
   });
 
   it("displays an error message", () => {
