@@ -93,6 +93,12 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
     variables: options.variables,
   });
 
+  if (!mockOptions?.error && data) {
+    options?.onCompleted?.(data);
+  } else if (mockOptions?.error) {
+    options?.onError?.(mockOptions.error);
+  }
+
   return {
     data:
       (!mockOptions?.error && !mockOptions?.loading && (data as TData)) || null,
@@ -199,6 +205,12 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
           ...storedMock,
           storedResponse: data,
         };
+
+        if (!mockOptions?.error && data) {
+          options?.onCompleted?.(data);
+        } else if (mockOptions?.error) {
+          options?.onError?.(mockOptions.error);
+        }
 
         return { data };
       };
