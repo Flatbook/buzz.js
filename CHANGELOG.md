@@ -1,3 +1,7 @@
+## buzz.js 0.4.0
+
+- Support `onCompleted` and `onError` props in `useQuery` and `useMutation`
+
 ## buzz.js 0.3.2
 
 - Export `QueryValidator` and `MutationValidator` types
