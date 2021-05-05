@@ -162,6 +162,57 @@ describe("mockUseQuery", () => {
       expect(onError).toHaveBeenCalledWith(null);
     });
   });
+
+  describe("onCompleted", () => {
+    it("calls onCompleted with valid data", () => {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery");
+
+      const onCompleted = jest.fn();
+      const onError = jest.fn();
+      render(
+        <SimpleQueryComponent
+          query={query}
+          variables={{ id: "test-input-id" }}
+          queryOptions={{
+            onCompleted,
+            onError,
+          }}
+        />,
+      );
+
+      expect(onError).not.toHaveBeenCalled();
+      expect(onCompleted).toHaveBeenCalledWith({
+        helloWithArgs: expect.objectContaining({
+          id: expect.any(String),
+          message: expect.any(String),
+        }),
+      });
+    });
+  });
+
+  describe("onError", () => {
+    it("calls onError function when error mocked", () => {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
+        error: new ApolloError({ errorMessage: "test-error" }),
+      });
+
+      const onCompleted = jest.fn();
+      const onError = jest.fn();
+      render(
+        <SimpleQueryComponent
+          query={query}
+          variables={{ id: "test-input-id" }}
+          queryOptions={{
+            onCompleted,
+            onError,
+          }}
+        />,
+      );
+
+      expect(onError).toHaveBeenCalledWith(expect.any(ApolloError));
+      expect(onCompleted).not.toHaveBeenCalled();
+    });
+  });
 });
 
 describe("mockUseMutation", () => {
@@ -173,6 +224,65 @@ describe("mockUseMutation", () => {
       }
     }
   `;
+
+  describe("onCompleted", () => {
+    it("calls onCompleted with valid data", () => {
+      mockUseMutation("TestMutation");
+      const mutationEmitter = new MutationEmitter();
+
+      const onCompleted = jest.fn();
+      const onError = jest.fn();
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          variables={{ id: "test-input-id" }}
+          mutationEmitter={mutationEmitter}
+          mutationOptions={{
+            onCompleted,
+            onError,
+          }}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(onError).not.toHaveBeenCalled();
+      expect(onCompleted).toHaveBeenCalledWith({
+        helloWithArgsMutation: expect.objectContaining({
+          id: expect.any(String),
+          message: expect.any(String),
+        }),
+      });
+    });
+  });
+
+  describe("onError", () => {
+    it("calls onError function when error mocked", () => {
+      mockUseMutation("TestMutation", {
+        error: new ApolloError({ errorMessage: "test-error" }),
+      });
+      const mutationEmitter = new MutationEmitter();
+
+      const onCompleted = jest.fn();
+      const onError = jest.fn();
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          variables={{ id: "test-input-id" }}
+          mutationEmitter={mutationEmitter}
+          mutationOptions={{
+            onCompleted,
+            onError,
+          }}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(onError).toHaveBeenCalledWith(expect.any(ApolloError));
+      expect(onCompleted).not.toHaveBeenCalled();
+    });
+  });
 
   describe("on mutate", () => {
     it("mocks out mutation", async () => {

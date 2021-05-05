@@ -1,8 +1,10 @@
 import {
   ApolloError,
+  MutationHookOptions,
+  OperationVariables,
+  QueryHookOptions,
   useMutation,
   useQuery,
-  OperationVariables,
 } from "@apollo/client";
 import { DocumentNode, OperationDefinitionNode } from "graphql";
 
@@ -14,6 +16,8 @@ interface TestProps<TData = any, TVariables = OperationVariables> {
   onData?: (data: TData) => void;
   onError?: (error: ApolloError) => void;
   onLoading?: (loading: boolean) => void;
+  queryOptions?: Partial<QueryHookOptions<TData, TVariables>>;
+  mutationOptions?: Partial<MutationHookOptions<TData, TVariables>>;
   mutationEmitter?: MutationEmitter;
 }
 
@@ -27,12 +31,16 @@ function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
     onError,
     onLoading,
     mutationEmitter,
+    queryOptions,
+    mutationOptions,
   } = props;
 
   if ((query.definitions[0] as OperationDefinitionNode).operation === "query") {
     const { data, loading, error } = useQuery<TData, TVariables>(query, {
       variables,
+      ...queryOptions,
     });
+
     onLoading?.(loading);
     onData?.(data);
     onError?.(error);
@@ -42,7 +50,7 @@ function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
     const [mutationFn, { data, error, loading }] = useMutation<
       TData,
       TVariables
-    >(query);
+    >(query, mutationOptions);
     onLoading?.(loading);
     onData?.(data);
     onError?.(error);
