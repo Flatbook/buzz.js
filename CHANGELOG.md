@@ -1,3 +1,7 @@
+## buzz.js 0.4.1
+
+- Do not call `onCompleted` when loading prop is passed
+
 ## buzz.js 0.4.0
 
 - Support `onCompleted` and `onError` props in `useQuery` and `useMutation`
