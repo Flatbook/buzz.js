@@ -26,7 +26,7 @@
 
 • `Optional` **response**: [RecursivePartial](../README.md#recursivepartial)\<TData>
 
-_Defined in [src/mock.ts:18](https://github.com/flatbook/buzz.js/blob/97e216f/src/mock.ts#L18)_
+_Defined in [src/mock.ts:18](https://github.com/flatbook/buzz.js/blob/b0289d3/src/mock.ts#L18)_
 
 ---
 
@@ -34,4 +34,4 @@ _Defined in [src/mock.ts:18](https://github.com/flatbook/buzz.js/blob/97e216f/sr
 
 • `Optional` **variables**: TVariables
 
-_Defined in [src/mock.ts:19](https://github.com/flatbook/buzz.js/blob/97e216f/src/mock.ts#L19)_
+_Defined in [src/mock.ts:19](https://github.com/flatbook/buzz.js/blob/b0289d3/src/mock.ts#L19)_
