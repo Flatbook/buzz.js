@@ -188,6 +188,28 @@ describe("mockUseQuery", () => {
         }),
       });
     });
+
+    it("does not call onCompleted when 'testing' is true", () => {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery", {
+        loading: true,
+      });
+
+      const onCompleted = jest.fn();
+      const onError = jest.fn();
+      render(
+        <SimpleQueryComponent
+          query={query}
+          variables={{ id: "test-input-id" }}
+          queryOptions={{
+            onCompleted,
+            onError,
+          }}
+        />,
+      );
+
+      expect(onError).not.toHaveBeenCalled();
+      expect(onCompleted).not.toHaveBeenCalled();
+    });
   });
 
   describe("onError", () => {
@@ -253,6 +275,32 @@ describe("mockUseMutation", () => {
           message: expect.any(String),
         }),
       });
+    });
+
+    it("does not call onCompleted when loading is true", () => {
+      mockUseMutation("TestMutation", {
+        loading: true,
+      });
+      const mutationEmitter = new MutationEmitter();
+
+      const onCompleted = jest.fn();
+      const onError = jest.fn();
+      render(
+        <SimpleQueryComponent
+          query={mutation}
+          variables={{ id: "test-input-id" }}
+          mutationEmitter={mutationEmitter}
+          mutationOptions={{
+            onCompleted,
+            onError,
+          }}
+        />,
+      );
+
+      mutationEmitter.callMutation();
+
+      expect(onError).not.toHaveBeenCalled();
+      expect(onCompleted).not.toHaveBeenCalled();
     });
   });
 
