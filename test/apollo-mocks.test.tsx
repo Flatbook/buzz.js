@@ -10,6 +10,7 @@ import { mockUseMutation, mockUseQuery } from "../src/apollo-mocks";
 import {
   MutationEmitter,
   SimpleQueryComponent,
+  RefetchQueryComponent,
   TestQuery,
   TestQueryVariables,
 } from "../test-components";
@@ -98,6 +99,32 @@ describe("mockUseQuery", () => {
       expect(onLoading).toHaveBeenCalledWith(true);
       expect(onData).toHaveBeenCalledWith(null);
       expect(onError).toHaveBeenCalledWith(null);
+    });
+  });
+
+  describe("refetch", () => {
+    it("can call refetch successfully", () => {
+      mockUseQuery<TestQuery, TestQueryVariables>("TestQuery");
+      const onLoading = jest.fn();
+      const onData = jest.fn();
+      const onError = jest.fn();
+      const onRefetch = jest.fn();
+
+      render(
+        <RefetchQueryComponent
+          query={query}
+          variables={{ id: "test-input-id" }}
+          onLoading={onLoading}
+          onData={onData}
+          onError={onError}
+          onRefetch={onRefetch}
+        />,
+      );
+
+      expect(onLoading).toHaveBeenCalledWith(false);
+      expect(onData).toHaveBeenCalledWith(null);
+      expect(onError).toHaveBeenCalledWith(null);
+      expect(onRefetch).toHaveBeenCalledWith(jest.fn());
     });
   });
 
