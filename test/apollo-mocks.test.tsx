@@ -109,6 +109,7 @@ describe("mockUseQuery", () => {
       const onData = jest.fn();
       const onError = jest.fn();
       const onRefetch = jest.fn();
+      const onFetchMore = jest.fn();
 
       render(
         <RefetchQueryComponent
@@ -118,13 +119,12 @@ describe("mockUseQuery", () => {
           onData={onData}
           onError={onError}
           onRefetch={onRefetch}
+          onFetchMore={onFetchMore}
         />,
       );
 
-      expect(onLoading).toHaveBeenCalledWith(false);
-      expect(onData).toHaveBeenCalledWith(null);
-      expect(onError).toHaveBeenCalledWith(null);
-      expect(onRefetch).toHaveBeenCalledWith(jest.fn());
+      expect(onRefetch).toHaveBeenCalledWith(expect.any(Function));
+      expect(onFetchMore).toHaveBeenCalledWith(expect.any(Function));
     });
   });
 
