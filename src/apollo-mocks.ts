@@ -106,6 +106,8 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
     error: (!mockOptions?.loading && mockOptions?.error) || null,
     // @ts-ignore intentionally incomplete
     called: validator.getCalls().length > 0,
+    refetch: jest.fn(),
+    fetchMore: jest.fn(),
   };
 }
 
