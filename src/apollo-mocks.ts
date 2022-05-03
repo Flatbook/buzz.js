@@ -1,5 +1,4 @@
 import * as ApolloClientPackage from "@apollo/client";
-import * as ReactHooksPackage from "@apollo/react-hooks";
 
 import {
   ApolloError,
@@ -25,28 +24,22 @@ interface MockUseQueryOptions<TData = any> {
 /**
  * @ignore
  */
-const useQuerySpies = [
-  jest.spyOn(ApolloClientPackage, "useQuery"),
-  jest.spyOn(ReactHooksPackage, "useQuery"),
-];
+const useQuerySpies = [jest.spyOn(ApolloClientPackage, "useQuery")];
 
 /**
  * @ignore
  */
-const useMutationSpies = [
-  jest.spyOn(ApolloClientPackage, "useMutation"),
-  jest.spyOn(ReactHooksPackage, "useMutation"),
-];
+const useMutationSpies = [jest.spyOn(ApolloClientPackage, "useMutation")];
 
 /**
  * @ignore
  */
-const defaultUseQuery = ReactHooksPackage.useQuery;
+const defaultUseQuery = ApolloClientPackage.useQuery;
 
 /**
  * @ignore
  */
-const defaultUseMutation = ReactHooksPackage.useMutation;
+const defaultUseMutation = ApolloClientPackage.useMutation;
 
 /**
  * @ignore
@@ -99,12 +92,12 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
     options?.onError?.(mockOptions.error);
   }
 
+  // @ts-ignore intentionally incomplete
   return {
     data:
       (!mockOptions?.error && !mockOptions?.loading && (data as TData)) || null,
     loading: mockOptions?.loading || false,
     error: (!mockOptions?.loading && mockOptions?.error) || null,
-    // @ts-ignore intentionally incomplete
     called: validator.getCalls().length > 0,
     refetch: jest.fn(),
     fetchMore: jest.fn(),
