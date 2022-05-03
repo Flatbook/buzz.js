@@ -34,7 +34,7 @@
 
 \+ **new GraphQLExecutionError**(`errors`: GraphQLError[]): [GraphQLExecutionError](graphqlexecutionerror.md)
 
-_Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/e8046c4/src/GraphQLExecutionError.ts#L4)_
+_Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/GraphQLExecutionError.ts#L4)_
 
 #### Parameters:
 
@@ -50,7 +50,7 @@ _Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js
 
 • **gqlErrors**: GraphQLError[]
 
-_Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/e8046c4/src/GraphQLExecutionError.ts#L4)_
+_Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/GraphQLExecutionError.ts#L4)_
 
 ---
 
@@ -96,7 +96,7 @@ _Defined in node_modules/typescript/lib/lib.es5.d.ts:984_
 
 ▸ `Static` `Private`**message**(`errors`: GraphQLError[]): string
 
-_Defined in [src/GraphQLExecutionError.ts:11](https://github.com/Flatbook/buzz.js/blob/e8046c4/src/GraphQLExecutionError.ts#L11)_
+_Defined in [src/GraphQLExecutionError.ts:11](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/GraphQLExecutionError.ts#L11)_
 
 #### Parameters:
 
