@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.6.2":
+"@apollo/client@^3.6.2", "@apollo/client@latest":
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.6.2.tgz#0418bfa6358dd117894c8af396706cfa2b186032"
   dependencies:
@@ -19,6 +19,12 @@
     tslib "^2.3.0"
     use-sync-external-store "^1.0.0"
     zen-observable-ts "^1.2.0"
+
+"@apollo/react-hooks@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@apollo/react-hooks/-/react-hooks-4.0.0.tgz#7bf7b320c90d276f637d9a84b503e17b840dd4e6"
+  dependencies:
+    "@apollo/client" latest
 
 "@babel/code-frame@^7.0.0":
   version "7.10.4"

@@ -1,4 +1,5 @@
 import * as ApolloClientPackage from "@apollo/client";
+import * as ReactHooksPackage from "@apollo/react-hooks";
 
 import {
   ApolloError,
@@ -24,12 +25,18 @@ interface MockUseQueryOptions<TData = any> {
 /**
  * @ignore
  */
-const useQuerySpies = [jest.spyOn(ApolloClientPackage, "useQuery")];
+const useQuerySpies = [
+  jest.spyOn(ApolloClientPackage, "useQuery"),
+  jest.spyOn(ReactHooksPackage, "useQuery"),
+];
 
 /**
  * @ignore
  */
-const useMutationSpies = [jest.spyOn(ApolloClientPackage, "useMutation")];
+const useMutationSpies = [
+  jest.spyOn(ApolloClientPackage, "useMutation"),
+  jest.spyOn(ReactHooksPackage, "useMutation"),
+];
 
 /**
  * @ignore
