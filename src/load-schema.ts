@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-// import { readFileSync } from "fs";
-import { buildClientSchema, IntrospectionQuery } from "graphql";
+import { readFileSync } from "fs";
 import { IMocks } from "@graphql-tools/mock";
 
 /**
  * @ignore
  */
-let DefaultSchema: IntrospectionQuery | null = null;
+let DefaultSchema: string | null = null;
 
 /**
  * @ignore
@@ -18,11 +17,11 @@ let DefaultMocks: IMocks = {};
 /**
  * @ignore
  */
-export function setDefaultSchema(schema: any): void {
+export function setDefaultSchema(schema: string): void {
   DefaultSchema = schema;
 }
 
-export function getDefaultSchema(): IntrospectionQuery | null {
+export function getDefaultSchema(): string | null {
   return DefaultSchema;
 }
 
@@ -33,9 +32,8 @@ export function getDefaultMocks(): IMocks {
   return DefaultMocks;
 }
 
-export function loadSchemaFile(filepath: IntrospectionQuery): void {
-  // const schema = readFileSync(filepath, "utf8");
-  const schema = buildClientSchema(filepath);
+export function loadSchemaFile(filepath: string): void {
+  const schema = readFileSync(filepath, "utf8");
 
   setDefaultSchema(schema);
 }
