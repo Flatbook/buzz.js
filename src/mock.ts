@@ -32,8 +32,9 @@ export function mockQueryResponse<TData, TVariables>(
   const schema = makeExecutableSchema({ typeDefs: getDefaultSchema() });
 
   const mockedSchema = addMocksToSchema({
-    schema: schema,
+    schema,
     mocks: getDefaultMocks(),
+    preserveResolvers: true,
   });
 
   const result: ExecutionResult<TData> = graphqlSync(
