@@ -43,7 +43,7 @@ describe("mockUseQuery", () => {
         />,
       );
       expect(validator.getCalls().length).toEqual(1);
-      expect(validator.getCalls()[0].options.variables.id).toEqual(
+      expect(validator.getCalls()[0].options?.variables?.id).toEqual(
         "test-input-id",
       );
     });
@@ -99,6 +99,30 @@ describe("mockUseQuery", () => {
       expect(onLoading).toHaveBeenCalledWith(true);
       expect(onData).toHaveBeenCalledWith(null);
       expect(onError).toHaveBeenCalledWith(null);
+    });
+  });
+
+  describe("skip state", () => {
+    it("returns nothing if skip: ture", () => {
+      mockUseQuery<TestQueryVariables>("TestQuery");
+      const onData = jest.fn();
+      const onLoading = jest.fn();
+      const onError = jest.fn();
+
+      render(
+        <SimpleQueryComponent
+          query={query}
+          onData={onData}
+          onLoading={onLoading}
+          onError={onError}
+          queryOptions={{ skip: true }}
+          variables={{ id: "example-id" }}
+        />,
+      );
+
+      expect(onError).toHaveBeenCalledWith(undefined);
+      expect(onLoading).toHaveBeenCalledWith(undefined);
+      expect(onData).toHaveBeenCalledWith(undefined);
     });
   });
 
@@ -379,7 +403,7 @@ describe("mockUseMutation", () => {
       return new Promise(res => {
         expect(mutationValidator.getCalls().length).toEqual(1);
         expect(
-          mutationValidator.getMostRecentCall().options?.variables,
+          mutationValidator.getMostRecentCall()?.options?.variables,
         ).toEqual({
           id: "example-id",
         });
