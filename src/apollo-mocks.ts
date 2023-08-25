@@ -81,6 +81,12 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
 ): QueryResult<TData, TVariables> {
   const queryString = query.loc.source.body;
 
+  // Return empty object if skip is true
+  if (options.skip) {
+    // @ts-ignore intentionally incomplete
+    return {};
+  }
+
   const data = mockQueryResponse<TData, TVariables>(queryString, {
     response: mockOptions?.response,
     variables: options.variables,
