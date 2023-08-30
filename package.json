@@ -48,8 +48,10 @@
     "@graphql-tools/mock": "^8.6.8",
     "@graphql-tools/schema": "^8.3.10",
     "@graphql-tools/utils": "^8.6.9",
-    "graphql": "^15.5.0",
-    "jest": ">=24.0.0"
+    "graphql": "^15.5.0"
+  },
+  "peerDependencies": {
+    "jest": ">=29.0.0"
   },
   "husky": {
     "hooks": {
