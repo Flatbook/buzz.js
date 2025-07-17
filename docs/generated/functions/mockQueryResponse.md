@@ -1,4 +1,4 @@
-[**buzz.js Documentation v0.4.4**](../README.md)
+[**buzz.js Documentation v0.5.0**](../README.md)
 
 ---
 
@@ -8,7 +8,7 @@
 
 > **mockQueryResponse**\<`TData`, `TVariables`\>(`query`, `options?`): `TData`
 
-Defined in: [mock.ts:44](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/mock.ts#L44)
+Defined in: [mock.ts:44](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/mock.ts#L44)
 
 Mocks a GraphQL query response with optional custom data
 

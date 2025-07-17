@@ -1,4 +1,4 @@
-[**buzz.js Documentation v0.4.4**](../README.md)
+[**buzz.js Documentation v0.5.0**](../README.md)
 
 ---
 
@@ -8,7 +8,7 @@
 
 > **mockUseQuery**\<`TData`, `TVariables`\>(`operationName`, `mockOptions?`): [`QueryValidator`](../classes/QueryValidator.md)\<`TData`, `TVariables`\>
 
-Defined in: [apollo-mocks.ts:132](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/apollo-mocks.ts#L132)
+Defined in: [apollo-mocks.ts:132](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/apollo-mocks.ts#L132)
 
 Mocks Apollo Client's useQuery hook for testing
 

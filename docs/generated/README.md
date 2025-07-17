@@ -1,8 +1,8 @@
-**buzz.js Documentation v0.4.4**
+**buzz.js Documentation v0.5.0**
 
 ---
 
-# buzz.js Documentation v0.4.4
+# buzz.js Documentation v0.5.0
 
 ## Classes
 

@@ -1,4 +1,4 @@
-[**buzz.js Documentation v0.4.4**](../README.md)
+[**buzz.js Documentation v0.5.0**](../README.md)
 
 ---
 
@@ -6,7 +6,7 @@
 
 # Class: QueryValidator\<TData, TVariables\>
 
-Defined in: [validators.ts:56](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L56)
+Defined in: [validators.ts:56](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/validators.ts#L56)
 
 ## Extends
 
@@ -42,7 +42,7 @@ Defined in: [validators.ts:56](https://github.com/Flatbook/buzz.js/blob/b6b990c7
 
 > `protected` **calls**: (`QueryInvocation`\<`TData`, `TVariables`\> \| `MutationInvocation`\<`TData`, `TVariables`\>)[] = `[]`
 
-Defined in: [validators.ts:30](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L30)
+Defined in: [validators.ts:30](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/validators.ts#L30)
 
 #### Inherited from
 
@@ -54,7 +54,7 @@ Defined in: [validators.ts:30](https://github.com/Flatbook/buzz.js/blob/b6b990c7
 
 > **addCall**(`invocation`): `void`
 
-Defined in: [validators.ts:60](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L60)
+Defined in: [validators.ts:60](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/validators.ts#L60)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [validators.ts:60](https://github.com/Flatbook/buzz.js/blob/b6b990c7
 
 > **getCalls**(): `QueryInvocation`\<`TData`, `TVariables`\>[]
 
-Defined in: [validators.ts:64](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L64)
+Defined in: [validators.ts:64](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/validators.ts#L64)
 
 Gets all recorded calls to this operation
 
@@ -92,7 +92,7 @@ Array of operation invocations
 
 > **getMostRecentCall**(): `undefined` \| `QueryInvocation`\<`TData`, `TVariables`\>
 
-Defined in: [validators.ts:68](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L68)
+Defined in: [validators.ts:68](https://github.com/Flatbook/buzz.js/blob/0bcb7dd776d01f1a717e3ab8b76084d265a535bd/src/validators.ts#L68)
 
 Gets the most recent call to this operation
 
