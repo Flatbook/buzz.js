@@ -5,44 +5,82 @@ import {
 } from "@apollo/client";
 import { DocumentNode } from "graphql";
 
-interface QueryInvocation<TData = any, TVariables = OperationVariables> {
+interface QueryInvocation<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+> {
   query: DocumentNode;
   options: QueryHookOptions<TData, TVariables>;
   result: TData | null;
 }
 
-interface MutationInvocation<TData = any, TVariables = OperationVariables> {
+interface MutationInvocation<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+> {
   mutation: DocumentNode;
   options: MutationFunctionOptions<TData, TVariables>;
   result: TData | null;
 }
 
-class Validator<InvocationT> {
-  private calls: InvocationT[];
+export class Validator<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+> {
+  protected calls: Array<
+    QueryInvocation<TData, TVariables> | MutationInvocation<TData, TVariables>
+  > = [];
 
-  constructor() {
-    this.calls = [];
-  }
-
-  getCalls(): InvocationT[] {
+  getCalls(): Array<
+    QueryInvocation<TData, TVariables> | MutationInvocation<TData, TVariables>
+  > {
     return this.calls;
   }
 
-  getMostRecentCall(): InvocationT | undefined {
+  getMostRecentCall():
+    | QueryInvocation<TData, TVariables>
+    | MutationInvocation<TData, TVariables>
+    | undefined {
     return this.calls[this.calls.length - 1];
-  }
-
-  addCall(invocation: InvocationT): void {
-    this.calls.push(invocation);
   }
 }
 
 export class QueryValidator<
   TData = any,
-  TVariables = OperationVariables
-> extends Validator<QueryInvocation<TData, TVariables>> {}
+  TVariables extends OperationVariables = OperationVariables,
+> extends Validator<TData, TVariables> {
+  addCall(invocation: QueryInvocation<TData, TVariables>): void {
+    this.calls.push(invocation);
+  }
+
+  getCalls(): QueryInvocation<TData, TVariables>[] {
+    return this.calls as QueryInvocation<TData, TVariables>[];
+  }
+
+  getMostRecentCall(): QueryInvocation<TData, TVariables> | undefined {
+    return this.calls[this.calls.length - 1] as QueryInvocation<
+      TData,
+      TVariables
+    >;
+  }
+}
 
 export class MutationValidator<
   TData = any,
-  TVariables = OperationVariables
-> extends Validator<MutationInvocation<TData, TVariables>> {}
+  TVariables extends OperationVariables = OperationVariables,
+> extends Validator<TData, TVariables> {
+  addCall(invocation: MutationInvocation<TData, TVariables>): void {
+    this.calls.push(invocation);
+  }
+
+  getCalls(): MutationInvocation<TData, TVariables>[] {
+    return this.calls as MutationInvocation<TData, TVariables>[];
+  }
+
+  getMostRecentCall(): MutationInvocation<TData, TVariables> | undefined {
+    return this.calls[this.calls.length - 1] as MutationInvocation<
+      TData,
+      TVariables
+    >;
+  }
+}

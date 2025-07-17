@@ -73,13 +73,16 @@ export function restoreMocks(): void {
 /**
  * @ignore
  */
-function mockedUseQuery<TData = any, TVariables = OperationVariables>(
+function mockedUseQuery<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables>,
   validator: QueryValidator<TData, TVariables>,
   mockOptions?: MockUseQueryOptions,
 ): QueryResult<TData, TVariables> {
-  const queryString = query.loc.source.body;
+  const queryString = query.loc?.source.body || "";
 
   // Return empty object if skip is true
   if (options.skip) {
@@ -101,32 +104,39 @@ function mockedUseQuery<TData = any, TVariables = OperationVariables>(
   // @ts-ignore intentionally incomplete
   return {
     data:
-      (!mockOptions?.error && !mockOptions?.loading && (data as TData)) || null,
+      (!mockOptions?.error && !mockOptions?.loading && (data as TData)) ||
+      undefined,
     loading: mockOptions?.loading || false,
-    error: (!mockOptions?.loading && mockOptions?.error) || null,
+    error: (!mockOptions?.loading && mockOptions?.error) || undefined,
     called: validator.getCalls().length > 0,
     refetch: jest.fn(),
     fetchMore: jest.fn(),
   };
 }
 
-export function mockUseQuery<TData = any, TVariables = OperationVariables>(
+export function mockUseQuery<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(
   operationName: string,
   mockOptions?: MockUseQueryOptions,
-): QueryValidator {
+): QueryValidator<TData, TVariables> {
   const mockFn = function (
     query: DocumentNode,
     options: QueryHookOptions<TData, TVariables>,
   ): QueryResult<TData, TVariables> {
     if (query.definitions.length === 0) {
-      return;
+      return {} as QueryResult<TData, TVariables>;
     }
 
-    const {
-      name: { value },
-    } = query.definitions[0] as OperationDefinitionNode;
+    const definition = query.definitions[0] as OperationDefinitionNode;
+    const name = definition.name?.value;
 
-    const storedMock = queryOperationMap[value];
+    if (!name) {
+      return defaultUseQuery(query, options) as QueryResult<TData, TVariables>;
+    }
+
+    const storedMock = queryOperationMap[name];
     if (storedMock) {
       const { validator, mockOptions, storedResponse } = storedMock;
 
@@ -139,50 +149,66 @@ export function mockUseQuery<TData = any, TVariables = OperationVariables>(
           mockOptions,
         );
 
-      validator.addCall({ query, options, result: data });
+      (validator as QueryValidator<TData, TVariables>).addCall({
+        query,
+        options,
+        result: data.data || null,
+      });
 
-      queryOperationMap[value] = {
+      queryOperationMap[name] = {
         ...storedMock,
-        storedResponse: data,
+        storedResponse: data as any,
       };
 
       return data as QueryResult<TData, TVariables>;
     }
 
-    return defaultUseQuery(query, options);
+    return defaultUseQuery(query, options) as QueryResult<TData, TVariables>;
   };
 
-  useQuerySpies.forEach(spy => spy.mockImplementation(mockFn));
+  useQuerySpies.forEach(spy => spy.mockImplementation(mockFn as any));
 
   const validator = new QueryValidator<TData, TVariables>();
   queryOperationMap[operationName] = {
-    validator,
+    validator: validator as any,
     mockOptions,
   };
 
   return validator;
 }
 
-export function mockUseMutation<TData = any, TVariables = OperationVariables>(
+export function mockUseMutation<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(
   operationName: string,
   mockOptions?: MockUseQueryOptions,
-): MutationValidator {
+): MutationValidator<TData, TVariables> {
   const mockFn = (
     mutation: DocumentNode,
     options?: MutationHookOptions<TData, TVariables>,
   ): MutationTuple<TData, TVariables> => {
     if (mutation.definitions.length === 0) {
-      return;
+      return [jest.fn(), {}] as unknown as MutationTuple<TData, TVariables>;
     }
 
-    const {
-      name: { value },
-    } = mutation.definitions[0] as OperationDefinitionNode;
+    const definition = mutation.definitions[0] as OperationDefinitionNode;
+    const name = definition.name?.value;
 
-    const storedMock = mutationOperationMap[value];
+    if (!name) {
+      return defaultUseMutation(mutation, options) as MutationTuple<
+        TData,
+        TVariables
+      >;
+    }
+
+    const storedMock = mutationOperationMap[name];
 
     if (!storedMock) {
-      return defaultUseMutation(mutation, options);
+      return defaultUseMutation(mutation, options) as MutationTuple<
+        TData,
+        TVariables
+      >;
     } else {
       const { validator, mockOptions, storedResponse } = storedMock;
 
@@ -196,13 +222,13 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
             variables: invocationOptions?.variables,
           });
 
-        validator.addCall({
+        (validator as MutationValidator<TData, TVariables>).addCall({
           mutation,
           options: invocationOptions,
           result: data,
         });
 
-        mutationOperationMap[value] = {
+        mutationOperationMap[name] = {
           ...storedMock,
           storedResponse: data,
         };
@@ -216,9 +242,11 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
         return { data };
       };
 
-      const mutationString = mutation.loc.source.body;
+      const mutationString = mutation.loc?.source.body || "";
 
-      const data = validator.getMostRecentCall()?.result;
+      const data = (
+        validator as MutationValidator<TData, TVariables>
+      ).getMostRecentCall()?.result;
       return [
         // @ts-ignore intentionally incomplete
         mutationFn,
@@ -226,20 +254,22 @@ export function mockUseMutation<TData = any, TVariables = OperationVariables>(
         {
           data:
             (!mockOptions?.error && !mockOptions?.loading && (data as TData)) ||
-            null,
+            undefined,
           loading: mockOptions?.loading || false,
-          error: mockOptions?.error || null,
-          called: validator.getCalls().length > 0,
+          error: mockOptions?.error || undefined,
+          called:
+            (validator as MutationValidator<TData, TVariables>).getCalls()
+              .length > 0,
         },
       ];
     }
   };
 
-  useMutationSpies.forEach(spy => spy.mockImplementation(mockFn));
+  useMutationSpies.forEach(spy => spy.mockImplementation(mockFn as any));
 
-  const validator = new MutationValidator();
+  const validator = new MutationValidator<TData, TVariables>();
   mutationOperationMap[operationName] = {
-    validator,
+    validator: validator as any,
     mockOptions,
   };
 

@@ -17,7 +17,7 @@ let DefaultMocks: IMocks = {};
 /**
  * @ignore
  */
-export function setDefaultSchema(schema: string): void {
+export function setDefaultSchema(schema: string | null): void {
   DefaultSchema = schema;
 }
 
