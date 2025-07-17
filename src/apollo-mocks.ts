@@ -114,6 +114,21 @@ function mockedUseQuery<
   };
 }
 
+/**
+ * Mocks Apollo Client's useQuery hook for testing
+ * @param operationName - The name of the GraphQL operation to mock
+ * @param mockOptions - Optional configuration for the mock behavior
+ * @param mockOptions.error - Apollo error to return
+ * @param mockOptions.loading - Whether to return loading state
+ * @param mockOptions.response - Custom response data
+ * @returns A QueryValidator instance to track calls
+ * @example
+ * ```typescript
+ * const validator = mockUseQuery("GetUser", {
+ *   response: { user: { id: "1", name: "John" } }
+ * });
+ * ```
+ */
 export function mockUseQuery<
   TData = any,
   TVariables extends OperationVariables = OperationVariables,
