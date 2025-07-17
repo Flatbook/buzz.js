@@ -1,82 +1,107 @@
-**@sonder/buzz.js**
+[**buzz.js Documentation v0.4.4**](../README.md)
 
-> [Globals](../README.md) / QueryValidator
+---
 
-# Class: QueryValidator\<**TData, TVariables**>
+[buzz.js Documentation](../README.md) / QueryValidator
 
-## Type parameters
+# Class: QueryValidator\<TData, TVariables\>
 
-- TData
-- TVariables
+Defined in: [validators.ts:56](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L56)
 
-## Hierarchy
+## Extends
 
-- [Validator](validator.md)\<[QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables>>
+- `Validator`\<`TData`, `TVariables`\>
 
-  ↳ **QueryValidator**
+## Type Parameters
 
-## Index
+### TData
 
-### Constructors
+`TData` = `any`
 
-- [constructor](queryvalidator.md#constructor)
+### TVariables
 
-### Methods
-
-- [addCall](queryvalidator.md#addcall)
-- [getCalls](queryvalidator.md#getcalls)
-- [getMostRecentCall](queryvalidator.md#getmostrecentcall)
+`TVariables` _extends_ `OperationVariables` = `OperationVariables`
 
 ## Constructors
 
-### constructor
+### Constructor
 
-\+ **new QueryValidator**(): [QueryValidator](queryvalidator.md)
+> **new QueryValidator**\<`TData`, `TVariables`\>(): `QueryValidator`\<`TData`, `TVariables`\>
 
-_Inherited from [Validator](validator.md).[constructor](validator.md#constructor)_
+#### Returns
 
-_Defined in [src/validators.ts:21](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L21)_
+`QueryValidator`\<`TData`, `TVariables`\>
 
-**Returns:** [QueryValidator](queryvalidator.md)
+#### Inherited from
+
+`Validator<TData, TVariables>.constructor`
+
+## Properties
+
+### calls
+
+> `protected` **calls**: (`QueryInvocation`\<`TData`, `TVariables`\> \| `MutationInvocation`\<`TData`, `TVariables`\>)[] = `[]`
+
+Defined in: [validators.ts:30](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L30)
+
+#### Inherited from
+
+`Validator.calls`
 
 ## Methods
 
-### addCall
+### addCall()
 
-▸ **addCall**(`invocation`: [QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables>): void
+> **addCall**(`invocation`): `void`
 
-_Inherited from [Validator](validator.md).[addCall](validator.md#addcall)_
+Defined in: [validators.ts:60](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L60)
 
-_Defined in [src/validators.ts:35](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L35)_
+#### Parameters
 
-#### Parameters:
+##### invocation
 
-| Name         | Type                                                                    |
-| ------------ | ----------------------------------------------------------------------- |
-| `invocation` | [QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables> |
+`QueryInvocation`\<`TData`, `TVariables`\>
 
-**Returns:** void
+#### Returns
 
----
-
-### getCalls
-
-▸ **getCalls**(): [QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables>[]
-
-_Inherited from [Validator](validator.md).[getCalls](validator.md#getcalls)_
-
-_Defined in [src/validators.ts:27](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L27)_
-
-**Returns:** [QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables>[]
+`void`
 
 ---
 
-### getMostRecentCall
+### getCalls()
 
-▸ **getMostRecentCall**(): [QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables> \| undefined
+> **getCalls**(): `QueryInvocation`\<`TData`, `TVariables`\>[]
 
-_Inherited from [Validator](validator.md).[getMostRecentCall](validator.md#getmostrecentcall)_
+Defined in: [validators.ts:64](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L64)
 
-_Defined in [src/validators.ts:31](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L31)_
+Gets all recorded calls to this operation
 
-**Returns:** [QueryInvocation](../interfaces/queryinvocation.md)\<TData, TVariables> \| undefined
+#### Returns
+
+`QueryInvocation`\<`TData`, `TVariables`\>[]
+
+Array of operation invocations
+
+#### Overrides
+
+`Validator.getCalls`
+
+---
+
+### getMostRecentCall()
+
+> **getMostRecentCall**(): `undefined` \| `QueryInvocation`\<`TData`, `TVariables`\>
+
+Defined in: [validators.ts:68](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L68)
+
+Gets the most recent call to this operation
+
+#### Returns
+
+`undefined` \| `QueryInvocation`\<`TData`, `TVariables`\>
+
+The most recent invocation or undefined
+
+#### Overrides
+
+`Validator.getMostRecentCall`

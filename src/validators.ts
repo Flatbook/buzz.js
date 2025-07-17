@@ -31,12 +31,20 @@ export class Validator<
     QueryInvocation<TData, TVariables> | MutationInvocation<TData, TVariables>
   > = [];
 
+  /**
+   * Gets all recorded calls to this operation
+   * @returns Array of operation invocations
+   */
   getCalls(): Array<
     QueryInvocation<TData, TVariables> | MutationInvocation<TData, TVariables>
   > {
     return this.calls;
   }
 
+  /**
+   * Gets the most recent call to this operation
+   * @returns The most recent invocation or undefined
+   */
   getMostRecentCall():
     | QueryInvocation<TData, TVariables>
     | MutationInvocation<TData, TVariables>
