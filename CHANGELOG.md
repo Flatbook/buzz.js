@@ -1,3 +1,7 @@
+## buzz.js 0.5.0
+
+- Update dependencies and fix codebase issues, add skip option handling, upgrade GraphQL tools and Apollo client, add refetch query component with fetchMore support, improve test coverage and linting
+
 ## buzz.js 0.4.1
 
 - Do not call `onCompleted` when loading prop is passed
