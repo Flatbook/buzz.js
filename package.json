@@ -16,7 +16,6 @@
     "check:typesafety": "tsc --noEmit",
     "check:lint": "eslint . --ext=ts,js",
     "check:test": "jest test",
-    "generate:types": "./bin/generate-types",
     "generate:docs": "typedoc --options ./typedoc.json ./src",
     "prepare": "yarn build",
     "preversion": "yarn check:lint && yarn check:test",
@@ -45,9 +44,9 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "ts-jest": "^29.2.5",
-    "typedoc": "^0.19.2",
-    "typedoc-plugin-external-module-name": "^4.0.3",
-    "typedoc-plugin-markdown": "^3.0.3",
+    "typedoc": "^0.28.7",
+    "typedoc-plugin-external-module-name": "^4.0.6",
+    "typedoc-plugin-markdown": "^4.7.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {

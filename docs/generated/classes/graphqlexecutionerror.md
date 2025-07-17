@@ -1,107 +1,43 @@
-**@sonder/buzz.js**
+[**buzz.js Documentation v0.4.4**](../README.md)
 
-> [Globals](../README.md) / GraphQLExecutionError
+---
+
+[buzz.js Documentation](../README.md) / GraphQLExecutionError
 
 # Class: GraphQLExecutionError
 
-## Hierarchy
+Defined in: [GraphQLExecutionError.ts:3](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/GraphQLExecutionError.ts#L3)
 
-- [Error](graphqlexecutionerror.md#error)
+## Extends
 
-  ↳ **GraphQLExecutionError**
-
-## Index
-
-### Constructors
-
-- [constructor](graphqlexecutionerror.md#constructor)
-
-### Properties
-
-- [gqlErrors](graphqlexecutionerror.md#gqlerrors)
-- [message](graphqlexecutionerror.md#message)
-- [name](graphqlexecutionerror.md#name)
-- [stack](graphqlexecutionerror.md#stack)
-- [Error](graphqlexecutionerror.md#error)
-
-### Methods
-
-- [message](graphqlexecutionerror.md#message)
+- `Error`
 
 ## Constructors
 
-### constructor
+### Constructor
 
-\+ **new GraphQLExecutionError**(`errors`: GraphQLError[]): [GraphQLExecutionError](graphqlexecutionerror.md)
+> **new GraphQLExecutionError**(`errors`): `GraphQLExecutionError`
 
-_Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/GraphQLExecutionError.ts#L4)_
+Defined in: [GraphQLExecutionError.ts:6](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/GraphQLExecutionError.ts#L6)
 
-#### Parameters:
+#### Parameters
 
-| Name     | Type           |
-| -------- | -------------- |
-| `errors` | GraphQLError[] |
+##### errors
 
-**Returns:** [GraphQLExecutionError](graphqlexecutionerror.md)
+`GraphQLError`[]
+
+#### Returns
+
+`GraphQLExecutionError`
+
+#### Overrides
+
+`Error.constructor`
 
 ## Properties
 
 ### gqlErrors
 
-• **gqlErrors**: GraphQLError[]
+> **gqlErrors**: `GraphQLError`[]
 
-_Defined in [src/GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/GraphQLExecutionError.ts#L4)_
-
----
-
-### message
-
-• **message**: string
-
-_Inherited from [GraphQLExecutionError](graphqlexecutionerror.md).[message](graphqlexecutionerror.md#message)_
-
-_Defined in node_modules/typescript/lib/lib.es5.d.ts:974_
-
----
-
-### name
-
-• **name**: string
-
-_Inherited from [GraphQLExecutionError](graphqlexecutionerror.md).[name](graphqlexecutionerror.md#name)_
-
-_Defined in node_modules/typescript/lib/lib.es5.d.ts:973_
-
----
-
-### stack
-
-• `Optional` **stack**: string
-
-_Inherited from [GraphQLExecutionError](graphqlexecutionerror.md).[stack](graphqlexecutionerror.md#stack)_
-
-_Defined in node_modules/typescript/lib/lib.es5.d.ts:975_
-
----
-
-### Error
-
-▪ `Static` **Error**: ErrorConstructor
-
-_Defined in node_modules/typescript/lib/lib.es5.d.ts:984_
-
-## Methods
-
-### message
-
-▸ `Static` `Private`**message**(`errors`: GraphQLError[]): string
-
-_Defined in [src/GraphQLExecutionError.ts:11](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/GraphQLExecutionError.ts#L11)_
-
-#### Parameters:
-
-| Name     | Type           |
-| -------- | -------------- |
-| `errors` | GraphQLError[] |
-
-**Returns:** string
+Defined in: [GraphQLExecutionError.ts:4](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/GraphQLExecutionError.ts#L4)

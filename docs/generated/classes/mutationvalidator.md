@@ -1,82 +1,107 @@
-**@sonder/buzz.js**
+[**buzz.js Documentation v0.4.4**](../README.md)
 
-> [Globals](../README.md) / MutationValidator
+---
 
-# Class: MutationValidator\<**TData, TVariables**>
+[buzz.js Documentation](../README.md) / MutationValidator
 
-## Type parameters
+# Class: MutationValidator\<TData, TVariables\>
 
-- TData
-- TVariables
+Defined in: [validators.ts:76](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L76)
 
-## Hierarchy
+## Extends
 
-- [Validator](validator.md)\<[MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables>>
+- `Validator`\<`TData`, `TVariables`\>
 
-  ↳ **MutationValidator**
+## Type Parameters
 
-## Index
+### TData
 
-### Constructors
+`TData` = `any`
 
-- [constructor](mutationvalidator.md#constructor)
+### TVariables
 
-### Methods
-
-- [addCall](mutationvalidator.md#addcall)
-- [getCalls](mutationvalidator.md#getcalls)
-- [getMostRecentCall](mutationvalidator.md#getmostrecentcall)
+`TVariables` _extends_ `OperationVariables` = `OperationVariables`
 
 ## Constructors
 
-### constructor
+### Constructor
 
-\+ **new MutationValidator**(): [MutationValidator](mutationvalidator.md)
+> **new MutationValidator**\<`TData`, `TVariables`\>(): `MutationValidator`\<`TData`, `TVariables`\>
 
-_Inherited from [Validator](validator.md).[constructor](validator.md#constructor)_
+#### Returns
 
-_Defined in [src/validators.ts:21](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L21)_
+`MutationValidator`\<`TData`, `TVariables`\>
 
-**Returns:** [MutationValidator](mutationvalidator.md)
+#### Inherited from
+
+`Validator<TData, TVariables>.constructor`
+
+## Properties
+
+### calls
+
+> `protected` **calls**: (`QueryInvocation`\<`TData`, `TVariables`\> \| `MutationInvocation`\<`TData`, `TVariables`\>)[] = `[]`
+
+Defined in: [validators.ts:30](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L30)
+
+#### Inherited from
+
+`Validator.calls`
 
 ## Methods
 
-### addCall
+### addCall()
 
-▸ **addCall**(`invocation`: [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables>): void
+> **addCall**(`invocation`): `void`
 
-_Inherited from [Validator](validator.md).[addCall](validator.md#addcall)_
+Defined in: [validators.ts:80](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L80)
 
-_Defined in [src/validators.ts:35](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L35)_
+#### Parameters
 
-#### Parameters:
+##### invocation
 
-| Name         | Type                                                                          |
-| ------------ | ----------------------------------------------------------------------------- |
-| `invocation` | [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables> |
+`MutationInvocation`\<`TData`, `TVariables`\>
 
-**Returns:** void
+#### Returns
 
----
-
-### getCalls
-
-▸ **getCalls**(): [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables>[]
-
-_Inherited from [Validator](validator.md).[getCalls](validator.md#getcalls)_
-
-_Defined in [src/validators.ts:27](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L27)_
-
-**Returns:** [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables>[]
+`void`
 
 ---
 
-### getMostRecentCall
+### getCalls()
 
-▸ **getMostRecentCall**(): [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables> \| undefined
+> **getCalls**(): `MutationInvocation`\<`TData`, `TVariables`\>[]
 
-_Inherited from [Validator](validator.md).[getMostRecentCall](validator.md#getmostrecentcall)_
+Defined in: [validators.ts:84](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L84)
 
-_Defined in [src/validators.ts:31](https://github.com/Flatbook/buzz.js/blob/d165dd5/src/validators.ts#L31)_
+Gets all recorded calls to this operation
 
-**Returns:** [MutationInvocation](../interfaces/mutationinvocation.md)\<TData, TVariables> \| undefined
+#### Returns
+
+`MutationInvocation`\<`TData`, `TVariables`\>[]
+
+Array of operation invocations
+
+#### Overrides
+
+`Validator.getCalls`
+
+---
+
+### getMostRecentCall()
+
+> **getMostRecentCall**(): `undefined` \| `MutationInvocation`\<`TData`, `TVariables`\>
+
+Defined in: [validators.ts:88](https://github.com/Flatbook/buzz.js/blob/b6b990c75387d5345f670c58e688921c51432841/src/validators.ts#L88)
+
+Gets the most recent call to this operation
+
+#### Returns
+
+`undefined` \| `MutationInvocation`\<`TData`, `TVariables`\>
+
+The most recent invocation or undefined
+
+#### Overrides
+
+`Validator.getMostRecentCall`

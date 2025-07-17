@@ -1,9 +1,24 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
   "excludeExternals": true,
-  "excludeNotExported": true,
-  "plugins": ["typedoc-plugin-markdown", "typedoc-plugin-external-module-name"],
   "out": "./docs/generated",
   "readme": "none",
-  "mode": "file",
-  "stripInternal": true
+  "excludeInternal": true,
+  "plugin": ["typedoc-plugin-markdown"],
+  "exclude": ["node_modules", "dist"],
+  "name": "buzz.js Documentation",
+  "categoryOrder": [
+    "Core Functions",
+    "Apollo Client Mocks",
+    "Validators",
+    "Schema Management",
+    "Utilities"
+  ],
+  "categorizeByGroup": true,
+  "defaultCategory": "Core Functions",
+  "sort": ["source-order"],
+  "includeVersion": true,
+  "hideGenerator": true,
+  "theme": "default"
 }

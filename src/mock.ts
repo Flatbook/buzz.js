@@ -19,6 +19,28 @@ interface MockedQueryResponseOptions<
   variables?: TVariables;
 }
 
+/**
+ * Mocks a GraphQL query response with optional custom data
+ * @param query - The GraphQL query string to mock
+ * @param options - Optional configuration for the mock response
+ * @param options.response - Custom response data to merge with the mock
+ * @param options.variables - Variables to pass to the query
+ * @returns The mocked response data
+ * @example
+ * ```typescript
+ * const data = mockQueryResponse(`
+ *   query GetUser($id: ID!) {
+ *     user(id: $id) {
+ *       id
+ *       name
+ *     }
+ *   }
+ * `, {
+ *   variables: { id: "1" },
+ *   response: { user: { name: "John Doe" } }
+ * });
+ * ```
+ */
 export function mockQueryResponse<TData, TVariables>(
   query: string,
   options?: MockedQueryResponseOptions<TData, TVariables>,
