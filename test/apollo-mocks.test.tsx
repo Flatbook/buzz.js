@@ -66,7 +66,7 @@ describe("mockUseQuery", () => {
         />,
       );
 
-      expect(onError).toHaveBeenCalledWith(null);
+      expect(onError).toHaveBeenCalledWith(undefined);
       expect(onLoading).toHaveBeenCalledWith(false);
       expect(onData).toHaveBeenCalledWith({
         helloWithArgs: expect.objectContaining({
@@ -97,8 +97,8 @@ describe("mockUseQuery", () => {
       );
 
       expect(onLoading).toHaveBeenCalledWith(true);
-      expect(onData).toHaveBeenCalledWith(null);
-      expect(onError).toHaveBeenCalledWith(null);
+      expect(onData).toHaveBeenCalledWith(undefined);
+      expect(onError).toHaveBeenCalledWith(undefined);
     });
   });
 
@@ -172,7 +172,7 @@ describe("mockUseQuery", () => {
         />,
       );
 
-      expect(onData).toHaveBeenCalledWith(null);
+      expect(onData).toHaveBeenCalledWith(undefined);
       expect(onLoading).toHaveBeenCalledWith(false);
       expect(onError).toHaveBeenCalledWith(expect.any(ApolloError));
     });
@@ -210,7 +210,7 @@ describe("mockUseQuery", () => {
       });
 
       expect(onLoading).toHaveBeenCalledWith(false);
-      expect(onError).toHaveBeenCalledWith(null);
+      expect(onError).toHaveBeenCalledWith(undefined);
     });
   });
 
@@ -410,7 +410,7 @@ describe("mockUseMutation", () => {
 
         mutationEmitter.onMutationResult(data => {
           expect(data).not.toBeNull();
-          res();
+          res(undefined);
         });
       });
     });
@@ -441,8 +441,8 @@ describe("mockUseMutation", () => {
       mutationEmitter.callMutation();
 
       expect(onLoading).toHaveBeenCalledWith(true);
-      expect(onData).toHaveBeenCalledWith(null);
-      expect(onError).toHaveBeenCalledWith(null);
+      expect(onData).toHaveBeenCalledWith(undefined);
+      expect(onError).toHaveBeenCalledWith(undefined);
     });
   });
 
@@ -470,7 +470,7 @@ describe("mockUseMutation", () => {
 
       mutationEmitter.callMutation();
 
-      expect(onData).toHaveBeenCalledWith(null);
+      expect(onData).toHaveBeenCalledWith(undefined);
       expect(onLoading).toHaveBeenCalledWith(false);
       expect(onError).toHaveBeenCalledWith(expect.any(ApolloError));
     });
@@ -506,7 +506,7 @@ describe("mockUseMutation", () => {
 
       expect(onData).toHaveBeenCalled();
       expect(onLoading).toHaveBeenCalledWith(false);
-      expect(onError).toHaveBeenCalledWith(null);
+      expect(onError).toHaveBeenCalledWith(undefined);
     });
   });
 });

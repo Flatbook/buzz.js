@@ -13,7 +13,7 @@ import { RecursivePartial } from "./RecursivePartial";
 
 interface MockedQueryResponseOptions<
   TData = any,
-  TVariables = OperationVariables
+  TVariables = OperationVariables,
 > {
   response?: RecursivePartial<TData>;
   variables?: TVariables;
@@ -29,20 +29,25 @@ export function mockQueryResponse<TData, TVariables>(
     throw new Error("query is not executable (must be a query or mutation)");
   }
 
-  const schema = makeExecutableSchema({ typeDefs: getDefaultSchema() });
+  const schemaDef = getDefaultSchema();
+  if (!schemaDef) {
+    throw new Error("No schema loaded. Call loadSchemaFile() first.");
+  }
+
+  const schema = makeExecutableSchema({ typeDefs: schemaDef });
 
   const mockedSchema = addMocksToSchema({
     schema: schema,
     mocks: getDefaultMocks(),
   });
 
-  const result: ExecutionResult<TData> = graphqlSync(
-    mockedSchema,
-    query,
-    null,
-    null,
-    options?.variables,
-  ) as ExecutionResult<TData>;
+  const result: ExecutionResult<TData> = graphqlSync({
+    schema: mockedSchema,
+    source: query,
+    variableValues: options?.variables as {
+      readonly [variable: string]: unknown;
+    },
+  }) as ExecutionResult<TData>;
 
   if (result.errors) {
     throw new GraphQLExecutionError([...result.errors]);
@@ -62,7 +67,7 @@ export function mergeResult<TData>(
     return result;
   }
 
-  return mergeWith(result, response, (obj, src) => {
+  return mergeWith(result, response, (obj: any, src: any) => {
     if (isArray(src)) {
       if (isArray(obj)) {
         let resArr = [];

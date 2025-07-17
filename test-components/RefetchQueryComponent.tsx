@@ -7,20 +7,24 @@ import {
 } from "@apollo/client";
 import { DocumentNode } from "graphql";
 
-interface TestProps<TData = any, TVariables = OperationVariables> {
+interface TestProps<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+> {
   query: DocumentNode;
   variables?: TVariables;
-  onData?: (data: TData) => void;
-  onError?: (error: ApolloError) => void;
+  onData?: (data: TData | undefined) => void;
+  onError?: (error: ApolloError | undefined) => void;
   onLoading?: (loading: boolean) => void;
   onRefetch?: (refetch: () => Promise<ApolloQueryResult<TData>>) => void;
   onFetchMore?: (fetchMore: () => Promise<ApolloQueryResult<unknown>>) => void;
   queryOptions?: Partial<QueryHookOptions<TData, TVariables>>;
 }
 
-function RefetchQueryComponent<TData = any, TVariables = OperationVariables>(
-  props: TestProps<TData, TVariables>,
-): null {
+function RefetchQueryComponent<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(props: TestProps<TData, TVariables>): null {
   const {
     query,
     variables,

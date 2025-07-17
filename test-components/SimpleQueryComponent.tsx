@@ -10,20 +10,24 @@ import { DocumentNode, OperationDefinitionNode } from "graphql";
 
 import { MutationEmitter, MUTATION_EMIT_KEY } from "./MutationEmitter";
 
-interface TestProps<TData = any, TVariables = OperationVariables> {
+interface TestProps<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+> {
   query: DocumentNode;
   variables?: TVariables;
-  onData?: (data: TData) => void;
-  onError?: (error: ApolloError) => void;
+  onData?: (data: TData | null | undefined) => void;
+  onError?: (error: ApolloError | undefined) => void;
   onLoading?: (loading: boolean) => void;
   queryOptions?: Partial<QueryHookOptions<TData, TVariables>>;
   mutationOptions?: Partial<MutationHookOptions<TData, TVariables>>;
   mutationEmitter?: MutationEmitter;
 }
 
-function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
-  props: TestProps<TData, TVariables>,
-): null {
+function SimpleQueryComponent<
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(props: TestProps<TData, TVariables>): null {
   const {
     query,
     variables,
@@ -55,7 +59,7 @@ function SimpleQueryComponent<TData = any, TVariables = OperationVariables>(
     onData?.(data);
     onError?.(error);
 
-    mutationEmitter.on(MUTATION_EMIT_KEY, async () => {
+    mutationEmitter?.on(MUTATION_EMIT_KEY, async () => {
       const { data } = await mutationFn({ variables });
       mutationEmitter?.mutationResult(data);
     });

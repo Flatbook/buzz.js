@@ -1,14 +1,22 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2015",
+    "target": "es2020",
+    "lib": ["es2020", "dom"],
     "declaration": true,
     "outDir": "./dist",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "jsx": "react"
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false
   },
   "include": ["src/**/*", "jest-dom.d.ts"],
-  "exclude": ["node_modules", "test"]
+  "exclude": ["node_modules", "test", "dist"]
 }
