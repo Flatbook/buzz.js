@@ -12,7 +12,7 @@ describe("mockQueryResponse", () => {
 
       expect(() => {
         mockQueryResponse(invalidString);
-      }).toThrowError();
+      }).toThrow();
     });
 
     it("throws an error when a fragment is passed", () => {
@@ -40,15 +40,15 @@ describe("mockQueryResponse", () => {
 
       expect(() => {
         mockQueryResponse(fragment);
-      }).toThrowError();
+      }).toThrow();
 
       expect(() => {
         mockQueryResponse(query);
-      }).not.toThrowError();
+      }).not.toThrow();
 
       expect(() => {
         mockQueryResponse(mutation);
-      }).not.toThrowError();
+      }).not.toThrow();
     });
   });
 
